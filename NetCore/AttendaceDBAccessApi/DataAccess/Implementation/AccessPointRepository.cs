@@ -12,11 +12,11 @@ namespace AttendaceDBAccessApi.DataAccess.Implementation
 {
     public class AccessPointRepository : IAccessPointRepository
     {
-        private readonly HRContext _context = null;
+        private readonly AttendanceContext _context = null;
 
         public AccessPointRepository(IOptions<DBConnectionSettings> settings)
         {
-            _context = HRContext.GetInstance(settings);
+            _context = AttendanceContext.GetInstance(settings);
         }
 
         public async Task AddAccessPoint(AccessPoint item)

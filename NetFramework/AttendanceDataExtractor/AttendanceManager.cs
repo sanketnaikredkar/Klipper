@@ -4,14 +4,16 @@ using Core.Models.Operationals;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AttendanceDataExtractor
 {
     public class AttendanceManager
     {
-        static public List<Employee> Employees { get; set; }
+        //static public List<Employee> Employees { get; set; }
 
-        static public List<Department> Departments { get; set; }
+        //static public List<Department> Departments { get; set; }
 
         static public List<AccessPoint> AccessPoints { get; set; }
 
@@ -36,30 +38,31 @@ namespace AttendanceDataExtractor
         #region MongoDB Specific
 
         static MongoClient _client = null;
+
         static IMongoDatabase _database = null;
-        static IMongoCollection<Employee> _employeesCollection = null;
-        static IMongoCollection<Department> _departmentsCollection = null;
+        //static IMongoCollection<Employee> _employeesCollection = null;
+        //static IMongoCollection<Department> _departmentsCollection = null;
         static IMongoCollection<AccessPoint> _accessPointsCollection = null;
         static IMongoCollection<AccessEvent> _accessEventsCollection = null;
 
         internal static void LoadToMongoDB()
         {
             _client = new MongoClient("mongodb://localhost:27017");
-            _database = _client.GetDatabase("HR");
+            _database = _client.GetDatabase("AttendanceDB");
 
-            _employeesCollection = _database.GetCollection<Employee>("Employees");
-            _departmentsCollection = _database.GetCollection<Department>("Departments");
+            //_employeesCollection = _database.GetCollection<Employee>("Employees");
+            //_departmentsCollection = _database.GetCollection<Department>("Departments");
             _accessPointsCollection = _database.GetCollection<AccessPoint>("AccessPoints");
             _accessEventsCollection = _database.GetCollection<AccessEvent>("AccessEvents");
 
-            foreach (var v in Departments)
-            {
-                AddDepartment(v);
-            }
-            foreach (var v in Employees)
-            {
-                AddEmployee(v);
-            }
+            //foreach (var v in Departments)
+            //{
+            //    AddDepartment(v);
+            //}
+            //foreach (var v in Employees)
+            //{
+            //    AddEmployee(v);
+            //}
             foreach (var v in AccessPoints)
             {
                 AddAccessPoint(v);
@@ -74,31 +77,31 @@ namespace AttendanceDataExtractor
 
         }
 
-        static public IEnumerable<Department> GetAllDepartments()
-        {
-            try
-            {
-                return _departmentsCollection.Find(_ => true).ToList();
-            }
-            catch (Exception ex)
-            {
-                // log or manage the exception
-                throw ex;
-            }
-        }
+        //static public IEnumerable<Department> GetAllDepartments()
+        //{
+        //    try
+        //    {
+        //        return _departmentsCollection.Find(_ => true).ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // log or manage the exception
+        //        throw ex;
+        //    }
+        //}
 
-        static public IEnumerable<Employee> GetAllEmployees()
-        {
-            try
-            {
-                return _employeesCollection.Find(_ => true).ToList();
-            }
-            catch (Exception ex)
-            {
-                // log or manage the exception
-                throw ex;
-            }
-        }
+        //static public IEnumerable<Employee> GetAllEmployees()
+        //{
+        //    try
+        //    {
+        //        return _employeesCollection.Find(_ => true).ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // log or manage the exception
+        //        throw ex;
+        //    }
+        //}
 
         static public IEnumerable<AccessPoint> GetAllAccessPoints()
         {
@@ -126,45 +129,45 @@ namespace AttendanceDataExtractor
             }
         }
 
-        static void AddDepartment(Department item)
-        {
-            try
-            {
-                var existing = GetAllDepartments();
-                foreach(var d in existing)
-                {
-                    if(d.ID == item.ID)
-                    {
-                        return;
-                    }
-                }
-                _departmentsCollection.InsertOne(item);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //static void AddDepartment(Department item)
+        //{
+        //    try
+        //    {
+        //        var existing = GetAllDepartments();
+        //        foreach(var d in existing)
+        //        {
+        //            if(d.ID == item.ID)
+        //            {
+        //                return;
+        //            }
+        //        }
+        //        _departmentsCollection.InsertOne(item);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
-        static public void AddEmployee(Employee item)
-        {
-            try
-            {
-                var existing = GetAllEmployees();
-                foreach (var d in existing)
-                {
-                    if (d.ID == item.ID)
-                    {
-                        return;
-                    }
-                }
-                _employeesCollection.InsertOne(item);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //static public void AddEmployee(Employee item)
+        //{
+        //    try
+        //    {
+        //        var existing = GetAllEmployees();
+        //        foreach (var d in existing)
+        //        {
+        //            if (d.ID == item.ID)
+        //            {
+        //                return;
+        //            }
+        //        }
+        //        _employeesCollection.InsertOne(item);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         static public void AddAccessPoint(AccessPoint item)
         {
@@ -193,9 +196,13 @@ namespace AttendanceDataExtractor
                 var existing = GetAllAccessEvents();
                 foreach (var d in existing)
                 {
-                    if(String.IsNullOrEmpty(item.EmployeeFirstName))
+                    //if(String.IsNullOrEmpty(item.EmployeeFirstName))
+                    //{
+                    //    return;
+                    //}
+                    if(d.EmployeeID == 0)
                     {
-                        return;
+                        continue;
                     }
                     if (d.AccessPointID == item.AccessPointID &&
                         d.AccessPointName == item.AccessPointName &&
@@ -215,18 +222,6 @@ namespace AttendanceDataExtractor
             }
         }
 
-        internal static Department DepartmentById(int v)
-        {
-            foreach (var d in Departments)
-            {
-                if (d.ID == v)
-                {
-                    return d;
-                }
-            }
-            return null;
-        }
-
         internal static AccessPoint AccessPointById(int v)
         {
             foreach (var d in AccessPoints)
@@ -239,17 +234,62 @@ namespace AttendanceDataExtractor
             return null;
         }
 
-        internal static Employee EmployeeById(int v)
+        //internal static Department DepartmentById(int v)
+        //{
+        //    foreach (var d in Departments)
+        //    {
+        //        if (d.ID == v)
+        //        {
+        //            return d;
+        //        }
+        //    }
+        //    return null;
+        //}
+
+        //internal static Employee EmployeeById(int v)
+        //{
+        //    foreach (var d in Employees)
+        //    {
+        //        if (d.ID == v)
+        //        {
+        //            return d;
+        //        }
+        //    }
+        //    return null;
+        //}
+
+        //internal static void LoadUsersToDB()
+        //{
+        //    var client = new MongoClient("mongodb://localhost:27017");
+        //    var database = client.GetDatabase("AuthDB");
+        //    var collection = database.GetCollection<User>("Users");
+
+        //    foreach (var v in Employees)
+        //    {
+        //        var user = new User()
+        //        {
+        //            ID = v.ID,
+        //            UserName = v.FirstName + "." + v.LastName,
+        //            Email = v.FirstName + "." + v.LastName + "@Klingelnberg.com",
+        //            PasswordHash = ToSha256(v.FirstName + "$xyz987")
+        //        };
+        //        collection.InsertOne(user);
+        //    }
+        //}
+
+        internal static string ToSha256(string input)
         {
-            foreach (var d in Employees)
+            if (string.IsNullOrWhiteSpace(input)) return string.Empty;
+
+            using (var sha = SHA256.Create())
             {
-                if (d.ID == v)
-                {
-                    return d;
-                }
+                var bytes = Encoding.ASCII.GetBytes(input);
+                var hash = sha.ComputeHash(bytes);
+                return Convert.ToBase64String(hash);
             }
-            return null;
+
         }
+
 
         #endregion
     }

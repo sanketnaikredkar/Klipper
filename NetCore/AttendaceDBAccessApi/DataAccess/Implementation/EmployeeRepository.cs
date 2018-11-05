@@ -14,12 +14,12 @@ namespace AttendaceDBAccessApi.DataAccess.Implementation
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly HRContext _context = null;
+        private readonly AttendanceContext _context = null;
         readonly ILogger _logger = Log.ForContext<EmployeeRepository>();
 
         public EmployeeRepository(IOptions<DBConnectionSettings> settings)
         {
-            _context = HRContext.GetInstance(settings);
+            _context = AttendanceContext.GetInstance(settings);
         }
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()

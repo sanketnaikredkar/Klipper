@@ -17,13 +17,14 @@ namespace AttendanceDataExtractor
             var accessPoints = JsonConvert.SerializeObject(AttendanceManager.AccessPoints, Formatting.Indented);
             System.IO.File.WriteAllText(@"C:\Temp\Attendance\AccessPoints.txt", accessPoints);
 
-            var employees = JsonConvert.SerializeObject(AttendanceManager.Employees, Formatting.Indented);
-            System.IO.File.WriteAllText(@"C:\Temp\Attendance\Employees.txt", employees);
+            //var employees = JsonConvert.SerializeObject(AttendanceManager.Employees, Formatting.Indented);
+            //System.IO.File.WriteAllText(@"C:\Temp\Attendance\Employees.txt", employees);
 
             var accessEvents = JsonConvert.SerializeObject(AttendanceManager.AccessEvents, Formatting.Indented);
             System.IO.File.WriteAllText(@"C:\Temp\Attendance\AccessEvents.txt", accessEvents);
 
-            //AttendanceManager.LoadToMongoDB();
+            AttendanceManager.LoadToMongoDB();
+            //AttendanceManager.LoadUsersToDB();
         }
     }
 }

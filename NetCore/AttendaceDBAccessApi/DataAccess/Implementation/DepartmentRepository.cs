@@ -12,11 +12,11 @@ namespace AttendaceDBAccessApi.DataAccess.Implementation
 {
     public class DepartmentRepository : IDepartmentRepository
     {
-        private readonly HRContext _context = null;
+        private readonly AttendanceContext _context = null;
 
         public DepartmentRepository(IOptions<DBConnectionSettings> settings)
         {
-            _context = HRContext.GetInstance(settings);
+            _context = AttendanceContext.GetInstance(settings);
         }
 
         public async Task AddDepartment(Department item)

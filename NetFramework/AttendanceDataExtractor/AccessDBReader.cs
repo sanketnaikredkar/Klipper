@@ -139,7 +139,7 @@ namespace AttendanceDataExtractor
                 departments.Add(d);
             }
 
-            AttendanceManager.Departments = departments;
+            //AttendanceManager.Departments = departments;
         }
 
         static public void ReadEmployees()
@@ -184,7 +184,7 @@ namespace AttendanceDataExtractor
                 employees.Add(emp);
             }
 
-            AttendanceManager.Employees = employees;
+            //AttendanceManager.Employees = employees;
         }
 
         private static bool ContainsAlphabeticals(string str)
@@ -230,14 +230,14 @@ namespace AttendanceDataExtractor
             {
                 AccessEvent d = new AccessEvent();
                 var id = int.Parse(row[UserId].ToString());
-                var employee = AttendanceManager.EmployeeById(id);
-                if(employee == null)
-                {
-                    continue;
-                }
-                d.EmployeeID = employee.ID;
-                d.EmployeeFirstName = employee.FirstName;
-                d.EmployeeLastName = employee.LastName;
+                //var employee = AttendanceManager.EmployeeById(id);
+                //if(employee == null)
+                //{
+                //    continue;
+                //}
+                //d.EmployeeID = employee.ID;
+                //d.EmployeeFirstName = employee.FirstName;
+                //d.EmployeeLastName = employee.LastName;
 
                 var accessPoint = AttendanceManager.AccessPointById(int.Parse(row[DeviceId].ToString()));
                 d.AccessPointID = accessPoint.ID;

@@ -7,11 +7,11 @@ using MongoDB.Driver;
 
 namespace AttendaceDBAccessApi.DataAccess.Implementation
 {
-    public class HRContext
+    public class AttendanceContext
     {
         private readonly IMongoDatabase _database = null;
 
-        public HRContext(IOptions<DBConnectionSettings> settings)
+        public AttendanceContext(IOptions<DBConnectionSettings> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             if (client != null)
@@ -20,13 +20,13 @@ namespace AttendaceDBAccessApi.DataAccess.Implementation
             }
         }
 
-        public static HRContext Instance { get; private set; } = null;
+        public static AttendanceContext Instance { get; private set; } = null;
 
-        public static HRContext GetInstance(IOptions<DBConnectionSettings> settings)
+        public static AttendanceContext GetInstance(IOptions<DBConnectionSettings> settings)
         {
             if (Instance == null)
             {
-                var context = new HRContext(settings);
+                var context = new AttendanceContext(settings);
                 Instance = context;
             }
             return Instance;

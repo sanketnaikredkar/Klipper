@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Core.Models.Business
+{
+    [Flags]
+    public enum ECompanyType : byte
+    {
+        Unspecified = 1,
+        Self,
+        Customer,
+        Supplier,
+        Partner
+    }
+
+    public class Company : Organization
+    {
+        public ECompanyType PrimaryTrait { get; set; }
+        public ECompanyType SecondaryTrait { get; set; }
+        public ECompanyType TertiaryTrait { get; set; }
+
+        public List<CompanyRepresentative> Representatives { get; set; }
+
+        public BusinessAccount MainBusinessAccount { get; set; }
+
+        public List<TaxAccount> TaxAccounts { get; set; }
+    }
+}
+

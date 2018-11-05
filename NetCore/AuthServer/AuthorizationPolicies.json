@@ -1,0 +1,42 @@
+﻿{
+  "Policy": {
+    "roles": [
+      {
+        "name": "HRRepresentative",
+        "subjects": [ "1", "2" ],
+        "identityRoles": [ "LeaveAuthority" ]
+      },
+      {
+        "name": "TeamLeader",
+        "subjects": [ "11", "12" ],
+        "identityRoles": [ "LeaveAuthority" ]
+      },
+      {
+        "name": "NormalUser",
+        "identityRoles": [ "User" ]
+      }
+    ],
+    "permissions": [
+      {
+        "name": "ApproveLeaves",
+        "roles": [ "HRRepresentative", "TeamLeader" ]
+      },
+      {
+        "name": "ApplyLeave",
+        "roles": [ "NormalUser", "HRRepresentative", "TeamLeader" ]
+      },
+      {
+        "name": "RequestRegularization",
+        "roles": [ "NormalUser", "HRRepresentative", "TeamLeader" ]
+      },
+      {
+        "name": "ApproveRegularization",
+        "roles": [ "HRRepresentative", "TeamLeader" ]
+      },
+      {
+        "name": "AccessReporteeRecords",
+        "roles": [  "HRRepresentative", "TeamLeader" ]
+      }
+    ]
+  }
+}

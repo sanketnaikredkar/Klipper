@@ -1,0 +1,42 @@
+﻿<Window x:Class="AutoCodeGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoCodeGenerator"
+        mc:Ignorable="d"
+        Background="DarkGray"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition MinWidth="150" Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Content="Generate Repository and Controller" FontWeight="Bold" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center"/>
+        <Label Content="Namespace" Grid.Row="1"  Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center"/>
+        <Label Content="Type" Grid.Row="2"  Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center"/>
+        <Label Content="Context" Grid.Row="3"  Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center"/>
+        <Button Content="Generate Repo/Controllers" Grid.Row="4" Grid.Column="1" Height="32" Width="200" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Click="GenerateRepoControllersButton_Click"/>
+        <TextBox Text="NNNN" x:Name="NamespaceTextbox" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch" Height="27" Margin="10 0" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="350"/>
+        <TextBox Text="XXXX" x:Name="TypeTextbox" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" Height="27" Margin="10 0" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="350"/>
+        <TextBox Text="YYYY" x:Name="ContextTextbox" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" Height="27" Margin="10 0" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="350"/>
+        <Button Content="Generate Startup.cs" x:Name="GenerateStartupButton" Grid.Row="6" Grid.Column="1" Height="32" Width="200" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Click="GenerateStartupButton_Click" />
+        <Button Content="Copy Serilog Middleware" x:Name="CopySerilogButton" Grid.Row="8" Grid.Column="1" Height="32" Width="200" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Click="CopySerilogButton_Click" />
+        <Button Content="Copy DBConnectionSettings" x:Name="CopyDBSettingsButton" Grid.Row="10" Grid.Column="1" Height="32" Width="200" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Click="CopyDBSettingsButton_Click"/>
+
+    </Grid>
+</Window>

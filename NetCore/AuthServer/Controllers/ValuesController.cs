@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PolicyServer.Runtime.Client;
 
 namespace AuthServer.Controllers
 {
@@ -10,8 +12,18 @@ namespace AuthServer.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IPolicyServerRuntimeClient _client;
+        private readonly IAuthorizationService _authz;
+
+        public ValuesController(IPolicyServerRuntimeClient client, IAuthorizationService authz)
+        {
+            _client = client;
+            _authz = authz;
+        }
+
         // GET api/values
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<string>> Get()
         {
             return new string[] { "value1", "value2" };

@@ -16,7 +16,7 @@ namespace AuthServer
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -110,8 +110,10 @@ namespace AuthServer
             // this is mainly useful for using the classic [Authorize(Roles="foo")] and IsInRole functionality
             // this is not needed if you use the client library directly or the new policy-based authorization framework in ASP.NET Core
             app.UsePolicyServerClaims();
+
             app.UseIdentityServer();
-            app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

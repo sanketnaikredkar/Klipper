@@ -7,6 +7,7 @@ using AuthServer.DataAccess.Database;
 using AuthServer.DataAccess;
 using Microsoft.AspNetCore.Authorization;
 using AuthServer.DataAccess.PolicyRequirements;
+using Microsoft.AspNetCore.Authorization.Policy;
 
 namespace AuthServer.Extensions
 {
@@ -38,7 +39,8 @@ namespace AuthServer.Extensions
 
         public static IServiceCollection AddCustomPolicyRequirements(this IServiceCollection services)
         {
-            services.AddTransient<IAuthorizationHandler, LeaveApplicationRequirementHandler>();
+            services.AddTransient<IPolicyEvaluator, PolicyEvaluator>();
+            //services.AddTransient<IAuthorizationHandler, LeaveApplicationRequirementHandler>();
             return services;
         }
 

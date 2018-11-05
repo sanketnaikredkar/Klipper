@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AttendaceDBAccessApi.DataAccess.Interfaces
+namespace AttendaceApi.DataAccess.Interfaces
 {
     public interface IAccessPointRepository
     {

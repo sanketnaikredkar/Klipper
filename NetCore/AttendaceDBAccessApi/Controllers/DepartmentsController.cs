@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AttendaceDBAccessApi.DataAccess.Interfaces;
+using AttendaceApi.DataAccess.Interfaces;
 using ERPCore.Models.Operationals;
-using AttendaceDBAccessApi.Infrastructure;
+using AttendaceApi.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace AttendaceDBAccessApi.Controllers
+namespace AttendaceApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

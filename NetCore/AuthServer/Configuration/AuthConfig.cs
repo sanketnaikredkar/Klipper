@@ -9,10 +9,10 @@ namespace AuthServer.Configuration
         {
             return new List<ApiResource>
             {
-                new ApiResource("AttendaceDBAccessApi", "Attendace Database Access Api"),
+                new ApiResource("AttendaceApi", "Attendace Api"),
                 new ApiResource("KlipperApi", "Klingelnberg India Platform for Personnel Enterprise Resources Api"),
-                new ApiResource("LeaveManagementApi", "Leave Management Database Access Api"),
-                new ApiResource("HRMDBAccessAPi", "Human Resource Management Database Access Api"),
+                new ApiResource("LeaveManagementApi", "Leave Management Api"),
+                new ApiResource("HRMApi", "Human Resource Management Api"),
             };
         }
 
@@ -37,7 +37,7 @@ namespace AuthServer.Configuration
                     ClientSecrets = {new Secret("Adpa@98765".Sha256()) },
                     AllowedScopes =
                     {
-                        "AttendaceDBAccessApi"
+                        "AttendaceApi"
                     }
                 },
                 new Client
@@ -48,7 +48,7 @@ namespace AuthServer.Configuration
                     ClientSecrets = {new Secret("LmdaApi@12345".Sha256()) },
                     AllowedScopes =
                     {
-                        "AttendaceDBAccessApi"
+                        "AttendaceApi"
                     }
                 },
                 new Client
@@ -59,10 +59,10 @@ namespace AuthServer.Configuration
                     ClientSecrets = {new Secret("KlipperApi@12345".Sha256()) },
                     AllowedScopes =
                     {
-                        "AttendaceDBAccessApi",
+                        "AttendaceApi",
                         "AuthDBAccessApi",
                         "LeaveManagementApi",
-                        "HRMDBAccessAPi"
+                        "HRMApi"
                     }
                 },
                 new Client

@@ -1,6 +1,6 @@
-﻿using AttendaceDBAccessApi.DataAccess.Interfaces;
+﻿using AttendaceApi.DataAccess.Interfaces;
 using ERPCore.Models.Operationals;
-using AttendaceDBAccessApi.Settings;
+using AttendaceApi.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AttendaceDBAccessApi.DataAccess.Implementation
+namespace AttendaceApi.DataAccess.Implementation
 {
     public class DepartmentRepository : IDepartmentRepository
     {

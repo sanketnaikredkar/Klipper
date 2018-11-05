@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceDataExtractor", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ERPCore.Models", "NetCore\ERPCore.Models\ERPCore.Models.csproj", "{F452C74B-1FD9-420E-8A41-EAB6F25AB28C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendaceDBAccessApi", "NetCore\AttendaceDBAccessApi\AttendaceDBAccessApi.csproj", "{5FB38BDF-5A08-4924-8788-8ED6F0629747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendaceApi", "NetCore\AttendaceDBAccessApi\AttendaceApi.csproj", "{5FB38BDF-5A08-4924-8788-8ED6F0629747}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendancePushApp", "NetCore\AttendancePushApp\AttendancePushApp.csproj", "{019A034A-0F58-49F7-A917-F822315452B4}"
 EndProject

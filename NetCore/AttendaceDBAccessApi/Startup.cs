@@ -1,7 +1,7 @@
-﻿using AttendaceDBAccessApi.DataAccess.Implementation;
-using AttendaceDBAccessApi.DataAccess.Interfaces;
-using AttendaceDBAccessApi.Diagnostics;
-using AttendaceDBAccessApi.Settings;
+﻿using AttendaceApi.DataAccess.Implementation;
+using AttendaceApi.DataAccess.Interfaces;
+using AttendaceApi.Diagnostics;
+using AttendaceApi.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ using Serilog.Core;
 using Serilog.Events;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace AttendaceDBAccessApi
+namespace AttendaceApi
 {
     public class Startup
     {
@@ -29,7 +29,7 @@ namespace AttendaceDBAccessApi
 
             Log.Logger = new LoggerConfiguration()
                     //.ReadFrom.Configuration(Configuration)
-                    .WriteTo.Async(a => a.File("AttendaceDBAccessApi_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
+                    .WriteTo.Async(a => a.File("AttendaceApi_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
                     .Enrich.FromLogContext()
                     .MinimumLevel.ControlledBy(new LoggingLevelSwitch() { MinimumLevel = LogEventLevel.Information })
                     .Enrich.WithEnvironmentUserName()
@@ -37,7 +37,7 @@ namespace AttendaceDBAccessApi
                     .Enrich.WithThreadId()
                     .CreateLogger();
 
-            Log.Information("AttendaceDBAccessApi starting up...");
+            Log.Information("AttendaceApi starting up...");
         }
 
         public IConfiguration Configuration { get; }
@@ -66,7 +66,7 @@ namespace AttendaceDBAccessApi
             //}).AddJwtBearer(o =>
             //{
             //    o.Authority = "https://localhost:49333";
-            //    o.Audience = "AttendaceDBAccessApi";
+            //    o.Audience = "AttendaceApi";
             //    o.RequireHttpsMetadata = false;
             //});
 
@@ -75,7 +75,7 @@ namespace AttendaceDBAccessApi
             {
                 options.Authority = "https://localhost:49333";
                 //options.RequireHttpsMetadata = false;
-                options.ApiName = "AttendaceDBAccessApi";
+                options.ApiName = "AttendaceApi";
             });
 
             AddMongoDBRelatedServices(services);

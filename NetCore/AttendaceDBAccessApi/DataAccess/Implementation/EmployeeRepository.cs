@@ -1,6 +1,6 @@
-﻿using AttendaceDBAccessApi.DataAccess.Interfaces;
+﻿using AttendaceApi.DataAccess.Interfaces;
 using ERPCore.Models.Employment;
-using AttendaceDBAccessApi.Settings;
+using AttendaceApi.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AttendaceDBAccessApi.DataAccess.Implementation
+namespace AttendaceApi.DataAccess.Implementation
 {
     public class EmployeeRepository : IEmployeeRepository
     {

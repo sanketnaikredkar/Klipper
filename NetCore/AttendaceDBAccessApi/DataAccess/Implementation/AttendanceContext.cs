@@ -1,11 +1,11 @@
 ﻿using ERPCore.Models.Employment;
 using ERPCore.Models.HR.Attendance;
 using ERPCore.Models.Operationals;
-using AttendaceApi.Settings;
+using AttendanceApi.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace AttendaceApi.DataAccess.Implementation
+namespace AttendanceApi.DataAccess.Implementation
 {
     public class AttendanceContext
     {

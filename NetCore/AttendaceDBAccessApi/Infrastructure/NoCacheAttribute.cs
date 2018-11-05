@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace AttendaceApi.Infrastructure
+namespace AttendanceApi.Infrastructure
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public sealed class NoCacheAttribute : ActionFilterAttribute

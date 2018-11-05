@@ -61,10 +61,10 @@ namespace AttendancePushApp
 
         private static async Task<string> GetTokenAsync()
         {
-            var discoveryResponse = await DiscoveryClient.GetAsync("https://localhost:5001/");
+            var discoveryResponse = await DiscoveryClient.GetAsync("https://localhost:49333/");
             if(discoveryResponse.IsError)
             {
-                Console.WriteLine("Error pushing attendance data to AttendaceApi: {0}", discoveryResponse.Error);
+                Console.WriteLine("Error pushing attendance data to AttendanceApi: {0}", discoveryResponse.Error);
                 return null;
             }
 
@@ -72,7 +72,7 @@ namespace AttendancePushApp
             var tokenResponse = await tokenClient.RequestClientCredentialsAsync();
             if(tokenResponse.IsError)
             {
-                Console.WriteLine("Error pushing attendance data to AttendaceApi -> Token end point error: {0}", tokenResponse.Error);
+                Console.WriteLine("Error pushing attendance data to AttendanceApi -> Token end point error: {0}", tokenResponse.Error);
                 return null;
             }
             return tokenResponse.AccessToken;

@@ -9,7 +9,7 @@ namespace AuthServer.Configuration
         {
             return new List<ApiResource>
             {
-                new ApiResource("AttendaceApi", "Attendace Api"),
+                new ApiResource("AttendanceApi", "Attendace Api"),
                 new ApiResource("KlipperApi", "Klingelnberg India Platform for Personnel Enterprise Resources Api"),
                 new ApiResource("LeaveManagementApi", "Leave Management Api"),
                 new ApiResource("HRMApi", "Human Resource Management Api"),
@@ -37,18 +37,18 @@ namespace AuthServer.Configuration
                     ClientSecrets = {new Secret("Adpa@98765".Sha256()) },
                     AllowedScopes =
                     {
-                        "AttendaceApi"
+                        "AttendanceApi"
                     }
                 },
                 new Client
                 {
                     ClientId = "LeaveManagementApi",
-                    ClientName = "Leave Management Database Access Api",
+                    ClientName = "Leave Management Api",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = {new Secret("LmdaApi@12345".Sha256()) },
+                    ClientSecrets = {new Secret("Lmapi@12345".Sha256()) },
                     AllowedScopes =
                     {
-                        "AttendaceApi"
+                        "AttendanceApi"
                     }
                 },
                 new Client
@@ -56,11 +56,10 @@ namespace AuthServer.Configuration
                     ClientId = "KlipperApi",
                     ClientName = "Klingelnberg India Platform for Personnel Enterprise Resources Api",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = {new Secret("KlipperApi@12345".Sha256()) },
+                    ClientSecrets = {new Secret("Klipperapi@12345".Sha256()) },
                     AllowedScopes =
                     {
-                        "AttendaceApi",
-                        "AuthDBAccessApi",
+                        "AttendanceApi",
                         "LeaveManagementApi",
                         "HRMApi"
                     }
@@ -70,7 +69,7 @@ namespace AuthServer.Configuration
                     ClientId = "KlipperApplication",
                     ClientName = "Klingelnberg India Platform for Personnel Enterprise Resources Application",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = {new Secret("KlipperApp@12345".Sha256()) },
+                    ClientSecrets = {new Secret("Klipperapp@12345".Sha256()) },
                     AllowedScopes =
                     {
                         "KlipperApi"

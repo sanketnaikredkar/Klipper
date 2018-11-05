@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Features;
 
-namespace AttendaceApi.Diagnostics
+namespace AttendanceApi.Diagnostics
 {
     class SerilogMiddleware
     {

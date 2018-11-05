@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AttendaceApi.DataAccess.Interfaces;
+using AttendanceApi.DataAccess.Interfaces;
 using ERPCore.Models.Employment;
 using ERPCore.Models.HR.Attendance;
-using AttendaceApi.Infrastructure;
+using AttendanceApi.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Serilog;
 
-namespace AttendaceApi.Controllers
+namespace AttendanceApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

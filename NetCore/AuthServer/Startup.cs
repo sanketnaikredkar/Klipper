@@ -84,7 +84,7 @@ namespace AuthServer
                 .AddStorageServicesBackedByDatabase()
                 .AddJwtBearerClientAuthentication()
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
-                .AddUsers();
+                .AddStores();
 
             // Sets up the PolicyServer client library and policy provider - 
             //configuration is loaded from AuthorizationPolicies.json
@@ -112,6 +112,7 @@ namespace AuthServer
             app.UsePolicyServerClaims();
 
             app.UseIdentityServer();
+            app.UseAuthentication();
 
             app.UseStaticFiles();
             app.UseMvc();

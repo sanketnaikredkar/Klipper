@@ -21,16 +21,18 @@ namespace AuthServer.Extensions
             builder.Services.AddTransient<IGenericRepository, GenericRepository>();
 
             //Below transients are used
-            builder.Services.AddTransient<IUserRepository, UserRepository>();
-            builder.Services.AddTransient<IClientStore, ClientStore>();
-            builder.Services.AddTransient<IResourceStore, ResourceStore>();
+            //builder.Services.AddTransient<IUserRepository, UserRepository>();
+            //builder.Services.AddTransient<IClientStore, ClientStore>();
+            //builder.Services.AddTransient<IResourceStore, ResourceStore>();
 
             return builder;
         }
 
-        public static IIdentityServerBuilder AddUsers(this IIdentityServerBuilder builder)
+        public static IIdentityServerBuilder AddStores(this IIdentityServerBuilder builder)
         {
             builder.Services.AddSingleton<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IClientStore, ClientStore>();
+            builder.Services.AddTransient<IResourceStore, ResourceStore>();
             //builder.AddProfileService<ProfileService>();
             builder.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
 

@@ -41,7 +41,6 @@ namespace AuthServer.Controllers
             _userRepository = userRepository;
             _interaction = interaction;
             _clientStore = clientStore;
-            //_account = new AccountService(interaction, httpContextAccessor, clientStore);
         }
 
         [HttpPost]
@@ -53,11 +52,9 @@ namespace AuthServer.Controllers
                 // validate username/password against in-memory store
                 if (_userRepository.ValidateCredentials(user.UserName, user.PasswordHash))
                 {
-                    Microsoft.AspNetCore.Authentication.AuthenticationProperties props = null;
-
                     // only set explicit expiration here if persistent. 
                     // otherwise we reply upon expiration configured in cookie middleware.
-                    props = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
+                    var props = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
                     {
                         IsPersistent = true,
                         ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
@@ -66,8 +63,9 @@ namespace AuthServer.Controllers
                     var claims = new Claim[]
                     {
                         new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String),
-                        new Claim(ClaimTypes.Role, "HRRepresentative", ClaimValueTypes.String) //For time being give access to all
+                        new Claim(ClaimTypes.Role, "HR", ClaimValueTypes.String) 
                     };
+
                     // issue authentication cookie with subject ID and username
                     var currentUser = _userRepository.GetByUserName(user.UserName);
                     //await AuthenticationHttpContextExtensions.SignInAsync(claimsPrincipal);

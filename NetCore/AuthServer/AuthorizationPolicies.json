@@ -2,40 +2,60 @@
   "Policy": {
     "roles": [
       {
-        "name": "HRRepresentative",
+        "name": "HR",
         "subjects": [ "1", "2" ],
-        "identityRoles": [ "LeaveAuthority" ]
+        "identityRoles": [ "LeaveApprover", "NormalUser", "AttendanceMonitor" ]
       },
       {
         "name": "TeamLeader",
         "subjects": [ "11", "12" ],
-        "identityRoles": [ "LeaveAuthority" ]
+        "identityRoles": [ "LeaveApprover", "NormalUser" ]
       },
       {
-        "name": "NormalUser",
-        "identityRoles": [ "User" ]
+        "name": "Employee",
+        "identityRoles": [ "NormalUser" ]
+      },
+      {
+        "name": "Admin",
+        "identityRoles": [ "UserManager", "NormalUser" ]
       }
     ],
     "permissions": [
       {
         "name": "ApproveLeaves",
-        "roles": [ "HRRepresentative", "TeamLeader" ]
+        "roles": [ "HR", "TeamLeader" ]
       },
       {
         "name": "ApplyLeave",
-        "roles": [ "NormalUser", "HRRepresentative", "TeamLeader" ]
+        "roles": [ "Employee", "HR", "TeamLeader" ]
       },
       {
         "name": "RequestRegularization",
-        "roles": [ "NormalUser", "HRRepresentative", "TeamLeader" ]
+        "roles": [ "Employee", "HR", "TeamLeader" ]
       },
       {
         "name": "ApproveRegularization",
-        "roles": [ "HRRepresentative", "TeamLeader" ]
+        "roles": [ "HR", "TeamLeader" ]
       },
       {
         "name": "AccessReporteeRecords",
-        "roles": [  "HRRepresentative", "TeamLeader" ]
+        "roles": [  "TeamLeader" ]
+      },
+      {
+        "name": "AccessAllRecords",
+        "roles": [  "HR" ]
+      },
+      {
+        "name": "AddYearlyHolidays",
+        "roles": [  "HR" ]
+      },
+      {
+        "name": "CreateUpdateDeleteUsers",
+        "roles": [  "HR" ]
+      },
+      {
+        "name": "AccessAllRecords",
+        "roles": [  "HR" ]
       }
     ]
   }

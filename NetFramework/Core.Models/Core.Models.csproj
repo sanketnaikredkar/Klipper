@@ -102,19 +102,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\BusinessActivity.cs" />
     <Compile Include="Business\Company.cs" />
-    <Compile Include="Business\CompanyRepresentative.cs" />
-    <Compile Include="Business\Finance.cs" />
-    <Compile Include="Business\Portfolio.cs" />
-    <Compile Include="Business\Product.cs" />
-    <Compile Include="Business\ProductPortfolio.cs" />
-    <Compile Include="Business\SolutionCategory.cs" />
-    <Compile Include="Business\ProductCategory.cs" />
-    <Compile Include="Business\SolutionPortfolio.cs" />
     <Compile Include="Core\Address.cs" />
     <Compile Include="Core\Contact.cs" />
-    <Compile Include="Business\BusinessAccount.cs" />
     <Compile Include="Core\SocialProfile.cs" />
     <Compile Include="HR\Attendance\AccessEvent.cs" />
     <Compile Include="HR\Attendance\AccessPoint.cs" />
@@ -123,15 +113,11 @@
     <Compile Include="Core\Organization.cs" />
     <Compile Include="Employment\Employee.cs" />
     <Compile Include="Core\Core.cs" />
-    <Compile Include="Business\DealAccount.cs" />
     <Compile Include="Core\Person.cs" />
     <Compile Include="Operationals\Department.cs" />
     <Compile Include="Operationals\Operations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Business\TaxAccount.cs" />
-    <Compile Include="Business\Transaction.cs" />
     <Compile Include="Authentication\User.cs" />
-    <Compile Include="Business\Solution.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

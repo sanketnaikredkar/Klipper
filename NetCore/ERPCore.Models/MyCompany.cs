@@ -10,10 +10,6 @@ namespace ERPCore.Models
     {
         public List<Employee> Employees { get; set; }
 
-        public Portfolio BusinessPortfolio { get; set; }
-
-        public Finance Financials { get; set; }
-
         public List<Department> Departments { get; set; }
 
     }

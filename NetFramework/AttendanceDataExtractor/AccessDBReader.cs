@@ -21,7 +21,7 @@ namespace AttendanceDataExtractor
         };
 
         static private bool _readDB = true;
-        static private int _lastMonthsCount = 6;
+        static private int _lastMonthsCount = 2;
 
         static public void Read()
         {
@@ -184,7 +184,7 @@ namespace AttendanceDataExtractor
                 employees.Add(emp);
             }
 
-            //AttendanceManager.Employees = employees;
+            AttendanceManager.Employees = employees;
         }
 
         private static bool ContainsAlphabeticals(string str)
@@ -214,7 +214,7 @@ namespace AttendanceDataExtractor
 
             OleDbCommand command = new OleDbCommand();
             command.Connection = _accessDBconnection;
-            command.CommandText = "select DeviceId,UserId,LogDate from " + tableName;
+            command.CommandText = "select DeviceId,UserId,LogDate,DeviceLogId from " + tableName;
 
             OleDbDataAdapter da = new OleDbDataAdapter(command);
             DataTable dt = new DataTable();
@@ -223,21 +223,22 @@ namespace AttendanceDataExtractor
             DataColumn UserId = dt.Columns["UserId"];
             DataColumn DeviceId = dt.Columns["DeviceId"];
             DataColumn LogDate = dt.Columns["LogDate"];
+            DataColumn DeviceLogId = dt.Columns["DeviceLogId"];
 
             List<AccessEvent> accessEvents = new List<AccessEvent>();
 
             foreach (DataRow row in dt.Rows)
             {
                 AccessEvent d = new AccessEvent();
-                var id = int.Parse(row[UserId].ToString());
-                //var employee = AttendanceManager.EmployeeById(id);
-                //if(employee == null)
-                //{
-                //    continue;
-                //}
-                //d.EmployeeID = employee.ID;
-                //d.EmployeeFirstName = employee.FirstName;
-                //d.EmployeeLastName = employee.LastName;
+                var useId = int.Parse(row[UserId].ToString());
+                var employee = AttendanceManager.EmployeeById(useId);
+                if (employee == null)
+                {
+                    continue;
+                }
+                d.EmployeeID = employee.ID;
+                d.EmployeeFirstName = employee.FirstName;
+                d.EmployeeLastName = employee.LastName;
 
                 var accessPoint = AttendanceManager.AccessPointById(int.Parse(row[DeviceId].ToString()));
                 d.AccessPointID = accessPoint.ID;
@@ -253,6 +254,15 @@ namespace AttendanceDataExtractor
                 var m = int.Parse(tokens[4]);
                 var s = int.Parse(tokens[5]);
                 d.EventTime = new DateTime(ye, mo, dy, h, m, s);
+
+                var deviceLogId = row[DeviceLogId].ToString();
+
+                var y = ye.ToString().Substring(2);
+
+                var idStr = d.AccessPointID.ToString() + y + mo.ToString() + deviceLogId;
+                var logId = int.Parse(idStr);
+                d.ID = logId;
+
                 accessEvents.Add(d);
             }
 

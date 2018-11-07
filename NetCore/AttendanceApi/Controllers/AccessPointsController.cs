@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AttendanceApi.DataAccess.Interfaces;
-using ERPCore.Models.Employment;
 using AttendanceApi.Infrastructure;
+using ERPCore.Models.HR.Attendance;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -11,26 +12,27 @@ namespace AttendanceApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    [Authorize]
+    public class AccessPointsController : ControllerBase
     {
-        private readonly IEmployeeRepository _repository = null;
+        private readonly IAccessPointRepository _repository = null;
 
-        public EmployeesController(IEmployeeRepository repository)
+        public AccessPointsController(IAccessPointRepository repository)
         {
             _repository = repository;
         }
 
         #region HTTP methods
 
-        // GET api/employees
+        // GET api/AccessPoints
         [NoCache]
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_repository.GetAllEmployees().Result);
+            return Ok(_repository.GetAllAccessPoints().Result);
         }
 
-        // GET api/employees/5
+        // GET api/AccessPoints/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -54,9 +56,9 @@ namespace AttendanceApi.Controllers
             return Ok(value);
         }
 
-        // POST api/employees
+        // POST api/AccessPoints
         [HttpPost]
-        public IActionResult Post([FromBody] Employee value)
+        public IActionResult Post([FromBody] AccessPoint value)
         {
             if (value == null)
             {
@@ -73,9 +75,9 @@ namespace AttendanceApi.Controllers
             return CreatedAtAction("Get", new { id = value.ID }, value);
         }
 
-        // PUT api/employees/5
+        // PUT api/AccessPoints/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Employee value)
+        public IActionResult Put(int id, [FromBody] AccessPoint value)
         {
             if(value == null || id < 0)
             {
@@ -97,7 +99,7 @@ namespace AttendanceApi.Controllers
             return NoContent();
         }
 
-        // DELETE api/employees/5
+        // DELETE api/AccessPoints/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

@@ -11,9 +11,9 @@ namespace AttendanceDataExtractor
 {
     public class AttendanceManager
     {
-        //static public List<Employee> Employees { get; set; }
+        static public List<Employee> Employees { get; set; }
 
-        //static public List<Department> Departments { get; set; }
+        static public List<Department> Departments { get; set; }
 
         static public List<AccessPoint> AccessPoints { get; set; }
 
@@ -40,8 +40,8 @@ namespace AttendanceDataExtractor
         static MongoClient _client = null;
 
         static IMongoDatabase _database = null;
-        //static IMongoCollection<Employee> _employeesCollection = null;
-        //static IMongoCollection<Department> _departmentsCollection = null;
+        static IMongoCollection<Employee> _employeesCollection = null;
+        static IMongoCollection<Department> _departmentsCollection = null;
         static IMongoCollection<AccessPoint> _accessPointsCollection = null;
         static IMongoCollection<AccessEvent> _accessEventsCollection = null;
 
@@ -50,8 +50,8 @@ namespace AttendanceDataExtractor
             _client = new MongoClient("mongodb://localhost:27017");
             _database = _client.GetDatabase("AttendanceDB");
 
-            //_employeesCollection = _database.GetCollection<Employee>("Employees");
-            //_departmentsCollection = _database.GetCollection<Department>("Departments");
+            _employeesCollection = _database.GetCollection<Employee>("Employees");
+            _departmentsCollection = _database.GetCollection<Department>("Departments");
             _accessPointsCollection = _database.GetCollection<AccessPoint>("AccessPoints");
             _accessEventsCollection = _database.GetCollection<AccessEvent>("AccessEvents");
 
@@ -234,29 +234,29 @@ namespace AttendanceDataExtractor
             return null;
         }
 
-        //internal static Department DepartmentById(int v)
-        //{
-        //    foreach (var d in Departments)
-        //    {
-        //        if (d.ID == v)
-        //        {
-        //            return d;
-        //        }
-        //    }
-        //    return null;
-        //}
+        internal static Department DepartmentById(int v)
+        {
+            foreach (var d in Departments)
+            {
+                if (d.ID == v)
+                {
+                    return d;
+                }
+            }
+            return null;
+        }
 
-        //internal static Employee EmployeeById(int v)
-        //{
-        //    foreach (var d in Employees)
-        //    {
-        //        if (d.ID == v)
-        //        {
-        //            return d;
-        //        }
-        //    }
-        //    return null;
-        //}
+        internal static Employee EmployeeById(int v)
+        {
+            foreach (var d in Employees)
+            {
+                if (d.ID == v)
+                {
+                    return d;
+                }
+            }
+            return null;
+        }
 
         //internal static void LoadUsersToDB()
         //{

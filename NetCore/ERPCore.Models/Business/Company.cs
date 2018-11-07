@@ -24,11 +24,6 @@ namespace ERPCore.Models.Business
         public ECompanyType SecondaryTrait { get; set; }
         public ECompanyType TertiaryTrait { get; set; }
 
-        public List<CompanyRepresentative> Representatives { get; set; }
-
-        public BusinessAccount MainBusinessAccount { get; set; }
-
-        public List<TaxAccount> TaxAccounts { get; set; }
     }
 }
 

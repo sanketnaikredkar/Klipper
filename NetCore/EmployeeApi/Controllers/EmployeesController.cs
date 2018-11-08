@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EmployeeApi.DataAccess.Interfaces;
+﻿using EmployeeApi.DataAccess.Interfaces;
 using ERPCore.Models.Employment;
 using Common.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 
 namespace EmployeeApi.Controllers

@@ -5,12 +5,14 @@ using ERPCore.Models.Operationals;
 using Common.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmployeeApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentsController : ControllerBase
     {
         private readonly IDepartmentRepository _departmentsRepository = null;

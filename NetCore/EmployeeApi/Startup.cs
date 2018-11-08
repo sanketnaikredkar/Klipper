@@ -60,7 +60,7 @@ namespace EmployeeApi
             .AddIdentityServerAuthentication(options =>
             {
                 options.Authority = "https://localhost:49333";
-                options.ApiName = "AttendanceApi";
+                options.ApiName = "EmployeeApi";
             });
 
             AddMongoDBRelatedServices(services);

@@ -2,7 +2,7 @@
   "profiles": {
     "AuthServer": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:49333;http://localhost:49334"
     }
   }

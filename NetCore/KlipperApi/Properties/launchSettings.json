@@ -1,10 +1,9 @@
 ﻿{
   "profiles": {
-    "PeopleApi": {
+    "KlipperApi": {
       "commandName": "Project",
       "launchBrowser": false,
-      "launchUrl": "api/values",
-      "applicationUrl": "https://localhost:6001;http://localhost:6000",
+      "applicationUrl": "https://localhost:7001;http://localhost:7000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

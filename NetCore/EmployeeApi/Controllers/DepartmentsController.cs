@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EmployeeApi.DataAccess.Interfaces;
-using ERPCore.Models.Operationals;
+using Models.Core.Operationals;
 using Common.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

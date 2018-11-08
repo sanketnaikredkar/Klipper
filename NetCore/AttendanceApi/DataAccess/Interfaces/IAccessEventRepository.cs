@@ -1,4 +1,4 @@
-using ERPCore.Models.HR.Attendance;
+using Models.Core.HR.Attendance;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

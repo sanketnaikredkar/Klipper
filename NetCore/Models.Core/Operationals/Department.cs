@@ -1,26 +1,25 @@
-﻿using ERPCore.Models.Helpers;
+﻿using Models.Core.Employment;
+using Models.Core.Helpers;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ERPCore.Models.HR.Attendance
+namespace Models.Core.Operationals
 {
-    public class AccessPoint
+    public class Department
     {
-        [BsonId]
         [JsonConverter(typeof(ObjectIdConverter))]
+        [BsonId]
         public ObjectId _objetId { get; set; }
 
         public int ID { get; set; }
 
         public string Name { get; set; }
 
-        public string IpAddress { get; set; }
+        //public List<Employee> Employees { get; set; }
+
+        //public Operations Operations { get; set; }
 
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using ERPCore.Models.Business;
-using ERPCore.Models.Employment;
-using ERPCore.Models.Operationals;
+using Models.Core.Business;
+using Models.Core.Employment;
+using Models.Core.Operationals;
 
-namespace ERPCore.Models
+namespace Models.Core
 {
 
     public class MyCompany : Organization

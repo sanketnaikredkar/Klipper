@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPCore.Models.Operationals
+namespace Models.Core.Operationals
 {
     public class Operations
     {

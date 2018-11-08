@@ -2,10 +2,10 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using Newtonsoft.Json;
-using ERPCore.Models.Helpers;
+using Models.Core.Helpers;
 using System.ComponentModel.DataAnnotations;
 
-namespace ERPCore.Models
+namespace Models.Core
 {
     public enum Gender
     {

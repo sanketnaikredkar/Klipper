@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AttendanceApi.DataAccess.Interfaces;
 using Common.Infrastructure;
-using ERPCore.Models.HR.Attendance;
+using Models.Core.HR.Attendance;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

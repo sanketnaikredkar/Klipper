@@ -1,10 +1,10 @@
-﻿using ERPCore.Models.Helpers;
+﻿using Models.Core.Helpers;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace ERPCore.Models
+namespace Models.Core
 {
     public class Contact
     {

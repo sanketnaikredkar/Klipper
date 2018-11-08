@@ -2,9 +2,9 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using MongoDB.Bson;
-using ERPCore.Models.Helpers;
+using Models.Core.Helpers;
 
-namespace ERPCore.Models
+namespace Models.Core
 {
     public class Address
     {

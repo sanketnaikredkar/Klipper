@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ERPCore.Models
+namespace Models.Core
 {
     public class Credential
     {

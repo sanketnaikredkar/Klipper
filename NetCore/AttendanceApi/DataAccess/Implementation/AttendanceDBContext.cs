@@ -1,5 +1,5 @@
 ﻿using Common.DataAccess;
-using ERPCore.Models.HR.Attendance;
+using Models.Core.HR.Attendance;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

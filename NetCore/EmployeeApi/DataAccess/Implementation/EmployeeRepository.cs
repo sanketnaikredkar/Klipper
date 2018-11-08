@@ -1,5 +1,5 @@
 ﻿using EmployeeApi.DataAccess.Interfaces;
-using ERPCore.Models.Employment;
+using Models.Core.Employment;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;

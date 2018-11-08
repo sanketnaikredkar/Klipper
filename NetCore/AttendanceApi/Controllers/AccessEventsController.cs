@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using AttendanceApi.DataAccess.Interfaces;
 using Common.Infrastructure;
-using ERPCore.Models.HR.Attendance;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models.Core.HR.Attendance;
 using Newtonsoft.Json;
 
 namespace AttendanceApi.Controllers

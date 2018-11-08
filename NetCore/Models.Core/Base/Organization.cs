@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
-using ERPCore.Models.Helpers;
+using Models.Core.Helpers;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace ERPCore.Models
+namespace Models.Core
 {
     public abstract class Organization
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ERPCore.Models.Business
+namespace Models.Core.Business
 {
     public class CompanyRepresentative : Person
     {

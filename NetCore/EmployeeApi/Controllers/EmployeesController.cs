@@ -1,5 +1,5 @@
 ﻿using EmployeeApi.DataAccess.Interfaces;
-using ERPCore.Models.Employment;
+using Models.Core.Employment;
 using Common.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;

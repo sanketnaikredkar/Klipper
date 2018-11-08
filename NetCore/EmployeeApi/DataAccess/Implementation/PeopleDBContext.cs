@@ -1,6 +1,6 @@
 ﻿using Common.DataAccess;
-using ERPCore.Models.Employment;
-using ERPCore.Models.Operationals;
+using Models.Core.Employment;
+using Models.Core.Operationals;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

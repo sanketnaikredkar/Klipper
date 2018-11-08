@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace ERPCore.Models.Employment
+namespace Models.Core.Employment
 {
     public class Employee : Person
     {

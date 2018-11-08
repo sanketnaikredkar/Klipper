@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ERPCore.Models.Helpers
+namespace Models.Core.Helpers
 {
     public class ObjectIdConverter : JsonConverter
     {

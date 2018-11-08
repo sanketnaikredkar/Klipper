@@ -1,15 +1,10 @@
-﻿using ERPCore.Models.Employment;
-using ERPCore.Models.Helpers;
+﻿using Models.Core.Helpers;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ERPCore.Models.HR.Attendance
+namespace Models.Core.HR.Attendance
 {
     public class AccessEvent
     {

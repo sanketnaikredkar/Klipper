@@ -1,6 +1,6 @@
-﻿using ERPCore.Models.Employment;
-using ERPCore.Models.HR.Attendance;
-using ERPCore.Models.Operationals;
+﻿using Models.Core.Employment;
+using Models.Core.HR.Attendance;
+using Models.Core.Operationals;
 using IdentityModel.Client;
 using Newtonsoft.Json;
 using System;

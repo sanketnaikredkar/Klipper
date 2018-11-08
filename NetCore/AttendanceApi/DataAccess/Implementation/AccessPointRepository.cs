@@ -1,6 +1,6 @@
 using AttendanceApi.DataAccess.Interfaces;
 using Common.DataAccess;
-using ERPCore.Models.HR.Attendance;
+using Models.Core.HR.Attendance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;

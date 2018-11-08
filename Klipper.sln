@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceDataExtractor", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendancePushApp", "NetCore\AttendancePushApp\AttendancePushApp.csproj", "{019A034A-0F58-49F7-A917-F822315452B4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uitilities", "Uitilities", "{3EB337AC-4225-4625-BA50-1051A7B323A0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "NetCore\AuthServer\AuthServer.csproj", "{9E73089B-08D9-4C03-A52E-5A75EC24B15D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttendanceApi", "NetCore\AttendanceApi\AttendanceApi.csproj", "{56A89794-AA39-4DF5-8D0D-7338A2A18898}"
@@ -24,6 +22,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.Core", "NetCore\Models.Core\Models.Core.csproj", "{4533B037-74DA-4CD0-97E4-87112438BF9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.Framework", "NetFramework\Models.Framework\Models.Framework.csproj", "{E06E7D98-0D23-4E9B-82D4-0489641AE7C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klipper.Desktop.CommandLine", "NetFramework\Klipper.Desktop.CommandLine\Klipper.Desktop.CommandLine.csproj", "{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klipper.Desktop.WPF", "NetFramework\Klipper.Desktop.WPF\Klipper.Desktop.WPF.csproj", "{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -131,6 +133,30 @@ Global
 		{E06E7D98-0D23-4E9B-82D4-0489641AE7C5}.Release|x64.Build.0 = Release|x64
 		{E06E7D98-0D23-4E9B-82D4-0489641AE7C5}.Release|x86.ActiveCfg = Release|x86
 		{E06E7D98-0D23-4E9B-82D4-0489641AE7C5}.Release|x86.Build.0 = Release|x86
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Debug|x64.Build.0 = Debug|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Debug|x86.Build.0 = Debug|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Release|x64.ActiveCfg = Release|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Release|x64.Build.0 = Release|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301}.Release|x86.Build.0 = Release|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Debug|x64.Build.0 = Debug|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Debug|x86.Build.0 = Debug|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Release|x64.ActiveCfg = Release|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Release|x64.Build.0 = Release|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +170,8 @@ Global
 		{8357232B-A3CD-415D-B205-2AC255868883} = {CB813C7A-0A1A-4D02-ADFC-7723D5587651}
 		{4533B037-74DA-4CD0-97E4-87112438BF9F} = {CB813C7A-0A1A-4D02-ADFC-7723D5587651}
 		{E06E7D98-0D23-4E9B-82D4-0489641AE7C5} = {64752EBA-CDAC-4D67-8A92-8F0FA99463D7}
+		{8C43BFEB-4685-4CCD-B2C3-18BCAE377301} = {64752EBA-CDAC-4D67-8A92-8F0FA99463D7}
+		{B3D5AA81-24CD-403F-BFB7-2D8A5B0A61DD} = {64752EBA-CDAC-4D67-8A92-8F0FA99463D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C157D0D-629A-439B-8079-1A2231792540}

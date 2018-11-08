@@ -1,6 +1,6 @@
-﻿using Core.Models.Employment;
-using Core.Models.HR.Attendance;
-using Core.Models.Operationals;
+﻿using Models.Framework.Employment;
+using Models.Framework.HR.Attendance;
+using Models.Framework.Operationals;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -179,7 +179,7 @@ namespace AttendanceDataExtractor
                 emp.LastName = name.Substring(tokens[0].Length).Trim();
 
                 var gender = row[Gender].ToString();
-                emp.Gender = gender == "Male" ? Core.Models.Gender.Male : Core.Models.Gender.Female;
+                emp.Gender = gender == "Male" ? Models.Framework.Gender.Male : Models.Framework.Gender.Female;
 
                 employees.Add(emp);
             }

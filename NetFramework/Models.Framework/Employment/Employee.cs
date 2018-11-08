@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Models.Operationals;
+using Models.Framework.Operationals;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Core.Models.Employment
+namespace Models.Framework.Employment
 {
     public class Employee : Person
     {

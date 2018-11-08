@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Core.Models.Business;
-using Core.Models.Employment;
+using Models.Framework.Business;
+using Models.Framework.Employment;
 
-namespace Core.Models
+namespace Models.Framework
 {
     public abstract class Organization
     {

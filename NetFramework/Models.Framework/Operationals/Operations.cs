@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models.Operationals
+namespace Models.Framework.Operationals
 {
     public class Operations
     {

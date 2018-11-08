@@ -1,6 +1,6 @@
-﻿using Core.Models.Employment;
-using Core.Models.HR.Attendance;
-using Core.Models.Operationals;
+﻿using Models.Framework.Employment;
+using Models.Framework.HR.Attendance;
+using Models.Framework.Operationals;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;

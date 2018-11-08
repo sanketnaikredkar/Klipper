@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models.HR.Attendance
+namespace Models.Framework.HR.Attendance
 {
     public class AccessPoint
     {

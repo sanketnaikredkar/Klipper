@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 
-namespace Core.Models.HR.Attendance
+namespace Models.Framework.HR.Attendance
 {
     public class MonthlyAccessLog
     {

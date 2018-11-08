@@ -1,9 +1,9 @@
-﻿using Core.Models.Employment;
+﻿using Models.Framework.Employment;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace Core.Models.Operationals
+namespace Models.Framework.Operationals
 {
     public class Department
     {

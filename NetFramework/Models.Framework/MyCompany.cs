@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Core.Models.Business;
-using Core.Models.Employment;
-using Core.Models.Operationals;
+using Models.Framework.Business;
+using Models.Framework.Employment;
+using Models.Framework.Operationals;
 
-namespace Core.Models
+namespace Models.Framework
 {
 
     public class MyCompany : Organization

@@ -1,4 +1,4 @@
-﻿using Core.Models.Employment;
+﻿using Models.Framework.Employment;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models.HR.Attendance
+namespace Models.Framework.HR.Attendance
 {
     public class AccessEvent
     {

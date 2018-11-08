@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace Core.Models
+namespace Models.Framework
 {
     public enum Gender
     {

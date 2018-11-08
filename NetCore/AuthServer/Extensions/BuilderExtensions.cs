@@ -16,14 +16,9 @@ namespace AuthServer.Extensions
         public static IIdentityServerBuilder AddStorageServicesBackedByDatabase(this IIdentityServerBuilder builder)
         {
             //Currently unused 
-            builder.Services.AddTransient<IRoleRepository, RoleRepository>();
-            builder.Services.AddTransient<IPermissionRepository, PermissionRepository>();
-            builder.Services.AddTransient<IGenericRepository, GenericRepository>();
-
-            //Below transients are used
-            //builder.Services.AddTransient<IUserRepository, UserRepository>();
-            //builder.Services.AddTransient<IClientStore, ClientStore>();
-            //builder.Services.AddTransient<IResourceStore, ResourceStore>();
+            //builder.Services.AddTransient<IRoleRepository, RoleRepository>();
+            //builder.Services.AddTransient<IPermissionRepository, PermissionRepository>();
+            //builder.Services.AddTransient<IGenericRepository, GenericRepository>();
 
             return builder;
         }
@@ -46,11 +41,11 @@ namespace AuthServer.Extensions
             return services;
         }
 
-        public static IIdentityServerBuilder AddPersistedGrants(this IIdentityServerBuilder builder)
-        {
-            builder.Services.AddSingleton<IPersistedGrantStore, PersistedGrantStore>();
-            return builder;
-        }
+        //public static IIdentityServerBuilder AddPersistedGrants(this IIdentityServerBuilder builder)
+        //{
+        //    builder.Services.AddSingleton<IPersistedGrantStore, PersistedGrantStore>();
+        //    return builder;
+        //}
 
     }
 }

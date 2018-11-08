@@ -31,7 +31,7 @@ namespace AuthServer.DataAccess.Database
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
 
         //Currently unused collections
-        public IMongoCollection<Role> Roles => _database.GetCollection<Role>("Roles");
-        public IMongoCollection<Permission> Permissions => _database.GetCollection<Permission>("Permissions");
+        //public IMongoCollection<Role> Roles => _database.GetCollection<Role>("Roles");
+        //public IMongoCollection<Permission> Permissions => _database.GetCollection<Permission>("Permissions");
     }
 }

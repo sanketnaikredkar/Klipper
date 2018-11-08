@@ -11,6 +11,7 @@ using AuthServer.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using AuthServer.DataAccess;
+using Common.Logging;
 
 namespace AuthServer
 {
@@ -81,7 +82,7 @@ namespace AuthServer
                 )
                 .AddDeveloperSigningCredential()
                 //.AddSigningCredential("CN-sts")
-                .AddStorageServicesBackedByDatabase()
+                //.AddStorageServicesBackedByDatabase()
                 .AddJwtBearerClientAuthentication()
                 .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddStores();
@@ -111,9 +112,9 @@ namespace AuthServer
             // this is not needed if you use the client library directly or the new policy-based authorization framework in ASP.NET Core
             app.UsePolicyServerClaims();
 
+            app.UseMiddleware<SerilogMiddleware>();
             app.UseIdentityServer();
             app.UseAuthentication();
-
             app.UseStaticFiles();
             app.UseMvc();
         }

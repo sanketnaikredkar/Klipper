@@ -10,9 +10,8 @@ namespace AuthServer.Configuration
             return new List<ApiResource>
             {
                 new ApiResource("AttendanceApi", "Attendace Api"),
+                new ApiResource("EmployeeApi", "Employee Data Management Api"),
                 new ApiResource("KlipperApi", "Klingelnberg India Platform for Personnel Enterprise Resources Api"),
-                new ApiResource("LeaveManagementApi", "Leave Management Api"),
-                new ApiResource("HRMApi", "Human Resource Management Api"),
             };
         }
 
@@ -42,17 +41,6 @@ namespace AuthServer.Configuration
                 },
                 new Client
                 {
-                    ClientId = "LeaveManagementApi",
-                    ClientName = "Leave Management Api",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = {new Secret("Lmapi@12345".Sha256()) },
-                    AllowedScopes =
-                    {
-                        "AttendanceApi"
-                    }
-                },
-                new Client
-                {
                     ClientId = "KlipperApi",
                     ClientName = "Klingelnberg India Platform for Personnel Enterprise Resources Api",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
@@ -60,8 +48,7 @@ namespace AuthServer.Configuration
                     AllowedScopes =
                     {
                         "AttendanceApi",
-                        "LeaveManagementApi",
-                        "HRMApi"
+                        "EmployeeApi"
                     }
                 },
                 new Client

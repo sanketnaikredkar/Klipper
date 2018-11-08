@@ -1,7 +1,6 @@
 using AttendanceApi.DataAccess.Interfaces;
-using AttendanceApi.Settings;
+using Common.DataAccess;
 using ERPCore.Models.HR.Attendance;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -15,12 +14,12 @@ namespace AttendanceApi.DataAccess.Implementation
 {
     public class AccessEventRepository : IAccessEventRepository
     {
-        private readonly AttendanceContext _context = null;
+        private readonly AttendanceDBContext _context = null;
         readonly ILogger _logger = Log.ForContext<AccessEventRepository>();
 
         public AccessEventRepository(IOptions<DBConnectionSettings> settings)
         {
-            _context = AttendanceContext.GetInstance(settings);
+            _context = AttendanceDBContext.GetInstance(settings);
         }
 
         public async Task<IEnumerable<AccessEvent>> GetAllAccessEvents()
@@ -66,7 +65,7 @@ namespace AttendanceApi.DataAccess.Implementation
                                 .FirstOrDefaultAsync();
                 if(!task.IsCompleted)
                 {
-                    Thread.Sleep(50);
+                    Thread.Sleep(5);
                 }
                 var o = task.Result;
                 if (o == null)

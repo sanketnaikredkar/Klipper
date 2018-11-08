@@ -1,22 +1,22 @@
-﻿using AttendanceApi.DataAccess.Interfaces;
+﻿using EmployeeApi.DataAccess.Interfaces;
 using ERPCore.Models.Operationals;
-using AttendanceApi.Settings;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.DataAccess;
 
-namespace AttendanceApi.DataAccess.Implementation
+namespace EmployeeApi.DataAccess.Implementation
 {
     public class DepartmentRepository : IDepartmentRepository
     {
-        private readonly AttendanceContext _context = null;
+        private readonly PeopleDBContext _context = null;
 
         public DepartmentRepository(IOptions<DBConnectionSettings> settings)
         {
-            _context = AttendanceContext.GetInstance(settings);
+            _context = PeopleDBContext.GetInstance(settings);
         }
 
         public async Task AddDepartment(Department item)
@@ -24,7 +24,6 @@ namespace AttendanceApi.DataAccess.Implementation
             try
             {
                 var filter = Builders<Department>.Filter.Eq(x => x.ID, item.ID);
-                    //& Builders<Department>.Filter.Eq(x => x.Name, item.Name);
 
                 var o = _context.Departments
                                 .Find(filter)

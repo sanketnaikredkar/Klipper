@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AttendanceApi.DataAccess.Interfaces
+namespace EmployeeApi.DataAccess.Interfaces
 {
     public interface IDepartmentRepository
     {

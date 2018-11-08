@@ -1,7 +1,5 @@
-﻿using AttendanceApi.DataAccess.Interfaces;
+﻿using EmployeeApi.DataAccess.Interfaces;
 using ERPCore.Models.Employment;
-using AttendanceApi.Settings;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -9,17 +7,18 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.DataAccess;
 
-namespace AttendanceApi.DataAccess.Implementation
+namespace EmployeeApi.DataAccess.Implementation
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly AttendanceContext _context = null;
+        private readonly PeopleDBContext _context = null;
         readonly ILogger _logger = Log.ForContext<EmployeeRepository>();
 
         public EmployeeRepository(IOptions<DBConnectionSettings> settings)
         {
-            _context = AttendanceContext.GetInstance(settings);
+            _context = PeopleDBContext.GetInstance(settings);
         }
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()

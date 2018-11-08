@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AttendanceApi.Settings
+namespace Common.DataAccess
 {
     public class DBConnectionSettings
     {

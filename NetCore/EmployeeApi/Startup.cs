@@ -1,6 +1,4 @@
-﻿using AttendanceApi.DataAccess.Implementation;
-using AttendanceApi.DataAccess.Interfaces;
-using Common.Logging;
+﻿using Common.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -11,8 +9,10 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using Common.DataAccess;
+using EmployeeApi.DataAccess.Interfaces;
+using EmployeeApi.DataAccess.Implementation;
 
-namespace AttendanceApi
+namespace EmployeeApi
 {
     public class Startup
     {
@@ -27,8 +27,7 @@ namespace AttendanceApi
             Configuration = builder.Build();
 
             Log.Logger = new LoggerConfiguration()
-                    //.ReadFrom.Configuration(Configuration)
-                    .WriteTo.Async(a => a.File("AttendanceApi_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
+                    .WriteTo.Async(a => a.File("PeopleApi_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
                     .Enrich.FromLogContext()
                     .MinimumLevel.ControlledBy(new LoggingLevelSwitch() { MinimumLevel = LogEventLevel.Information })
                     .Enrich.WithEnvironmentUserName()
@@ -36,7 +35,7 @@ namespace AttendanceApi
                     .Enrich.WithThreadId()
                     .CreateLogger();
 
-            Log.Information("AttendanceApi starting up...");
+            Log.Information("EmployeeApi starting up...");
         }
 
         public IConfiguration Configuration { get; }
@@ -57,22 +56,10 @@ namespace AttendanceApi
                 .AddAuthorization()
                 .AddJsonFormatters();
 
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(o =>
-            //{
-            //    o.Authority = "https://localhost:49333";
-            //    o.Audience = "AttendanceApi";
-            //    o.RequireHttpsMetadata = false;
-            //});
-
             services.AddAuthentication("Bearer")
             .AddIdentityServerAuthentication(options =>
             {
                 options.Authority = "https://localhost:49333";
-                //options.RequireHttpsMetadata = false;
                 options.ApiName = "AttendanceApi";
             });
 
@@ -87,8 +74,8 @@ namespace AttendanceApi
                 options.Database = Configuration.GetSection("MongoConnection:Database").Value;
             });
 
-            services.AddTransient<IAccessPointRepository, AccessPointRepository>();
-            services.AddTransient<IAccessEventRepository, AccessEventRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

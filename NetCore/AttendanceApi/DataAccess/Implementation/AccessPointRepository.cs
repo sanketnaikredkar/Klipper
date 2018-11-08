@@ -1,5 +1,5 @@
 using AttendanceApi.DataAccess.Interfaces;
-using AttendanceApi.Settings;
+using Common.DataAccess;
 using ERPCore.Models.HR.Attendance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -14,12 +14,12 @@ namespace AttendanceApi.DataAccess.Implementation
 {
     public class AccessPointRepository : IAccessPointRepository
     {
-        private readonly AttendanceContext _context = null;
+        private readonly AttendanceDBContext _context = null;
         readonly ILogger _logger = Log.ForContext<AccessPointRepository>();
 
         public AccessPointRepository(IOptions<DBConnectionSettings> settings)
         {
-            _context = AttendanceContext.GetInstance(settings);
+            _context = AttendanceDBContext.GetInstance(settings);
         }
 
         public async Task<IEnumerable<AccessPoint>> GetAllAccessPoints()

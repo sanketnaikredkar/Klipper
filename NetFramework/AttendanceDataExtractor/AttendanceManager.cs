@@ -74,7 +74,6 @@ namespace AttendanceDataExtractor
                     AddAccessLog(e);
                 }
             }
-
         }
 
         //static public IEnumerable<Department> GetAllDepartments()

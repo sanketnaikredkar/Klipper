@@ -2,7 +2,7 @@ using Models.Core.Authentication;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AuthServer.DataAccess.Database
+namespace KlipperApi.DataAccess
 {
     public interface IUserRepository
     {

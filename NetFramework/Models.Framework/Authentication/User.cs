@@ -1,40 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Models.Framework.Helpers;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Models.Framework
+namespace Models.Framework.Authentication
 {
-    public class UserRole
+    public class User
     {
+        [BsonId]
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public ObjectId _objetId { get; set; }
+
         public int ID { get; set; }
-
-        [Required]
-        [StringLength(25)]
-        [Display(Name = "User Role")]
-        public string Role { get; set; }
-    }
-
-    public class Credential
-    {
-        public int ID { get; set; }
-
-        [Required]
-        [StringLength(10)]
-        [Display(Name = "User ID")]
-        public string UserId { get; set; }
-
-        //Password should be protected / encrypted
-        [Required]
-        [StringLength(20)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        public List<UserRole> Roles { get; set; }
-
-        public List<UserAction> UserActions { get; set; }
+        public string Email { get; set; }
+        public string UserName { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
+

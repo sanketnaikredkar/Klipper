@@ -62,6 +62,20 @@ namespace AuthServer.Configuration
                         "KlipperApi"
                     }
                 },
+                new Client
+                {
+                    ClientId = "Klipper.Desktop.CommandLine",
+                    ClientName = "Klingelnberg India Platform for Personnel Enterprise Resources Application",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientSecrets = {new Secret("Klipperapp@12345".Sha256()) },
+                    AllowedScopes =
+                    {
+                        "KlipperApi",
+                        "AttendanceApi",
+                        "EmployeeApi"
+                    }
+                }
+
             };
         }
     }

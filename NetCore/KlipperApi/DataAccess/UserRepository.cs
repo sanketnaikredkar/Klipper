@@ -1,3 +1,4 @@
+using Common.DataAccess;
 using Microsoft.Extensions.Options;
 using Models.Core.Authentication;
 using MongoDB.Bson;
@@ -7,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AuthServer.DataAccess.Database
+namespace KlipperApi.DataAccess
 {
     public class UserRepository : IUserRepository
     {

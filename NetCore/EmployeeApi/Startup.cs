@@ -53,15 +53,15 @@ namespace EmployeeApi
 
             services.AddMvcCore()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddAuthorization()
+                //.AddAuthorization()
                 .AddJsonFormatters();
 
-            services.AddAuthentication("Bearer")
-            .AddIdentityServerAuthentication(options =>
-            {
-                options.Authority = "https://localhost:49333";
-                options.ApiName = "EmployeeApi";
-            });
+            //services.AddAuthentication("Bearer")
+            //.AddIdentityServerAuthentication(options =>
+            //{
+            //    options.Authority = "https://localhost:49333";
+            //    options.ApiName = "EmployeeApi";
+            //});
 
             AddMongoDBRelatedServices(services);
         }
@@ -93,8 +93,7 @@ namespace EmployeeApi
                 app.UseHsts();
             }
             app.UseMiddleware<SerilogMiddleware>();
-            app.UseAuthentication();
-            app.UseHttpsRedirection();
+            //app.UseAuthentication();
             app.UseMvc();
         }
     }

@@ -44,4 +44,8 @@
     <PackageReference Include="Serilog.Sinks.File" Version="4.0.1-dev-00798" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Models.Core\Models.Core.csproj" />
+  </ItemGroup>
+
 </Project>

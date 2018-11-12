@@ -12,7 +12,7 @@ namespace EmployeeApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DepartmentsController : ControllerBase
     {
         private readonly IDepartmentRepository _departmentsRepository = null;

@@ -1,9 +1,9 @@
-﻿using AuthServer.DataAccess.Database;
+﻿using Models.Core.Helpers;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
-namespace AuthServer.DataAccess
+namespace Models.Core.Authentication
 {
     public class User
     {

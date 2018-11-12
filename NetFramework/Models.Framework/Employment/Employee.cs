@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Models.Framework.Authentication;
 using Models.Framework.Operationals;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -12,7 +13,7 @@ namespace Models.Framework.Employment
         [BsonDateTimeOptions]
         public DateTime JoiningDate { get; set; }
 
-        public Credential Credentials { get; set; }
+        public List<UserRole> Roles { get; set; }
 
         public int BusinessGroup { get; set; }
 

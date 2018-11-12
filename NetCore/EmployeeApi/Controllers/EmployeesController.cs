@@ -9,7 +9,7 @@ namespace EmployeeApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-	[Authorize]
+	//[Authorize]
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository _repository = null;

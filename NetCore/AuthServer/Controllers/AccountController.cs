@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using AuthServer.DataAccess.Database;
-using AuthServer.DataAccess;
+using Models.Core.Authentication;
 
 namespace AuthServer.Controllers
 {
@@ -36,7 +36,7 @@ namespace AuthServer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(User user)
+        public async Task<IActionResult> Login([FromBody] User user)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +54,7 @@ namespace AuthServer.Controllers
                     var claims = new Claim[]
                     {
                         new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String),
-                        new Claim(ClaimTypes.Role, "HR", ClaimValueTypes.String) 
+                        new Claim(ClaimTypes.Role, "Employee", ClaimValueTypes.String) 
                     };
 
                     // issue authentication cookie with subject ID and username
@@ -73,12 +73,12 @@ namespace AuthServer.Controllers
             return NotFound();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync();
-            return Ok();
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    await HttpContext.SignOutAsync();
+        //    return Ok();
+        //}
     }
 }

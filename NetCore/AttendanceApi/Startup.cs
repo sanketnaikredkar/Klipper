@@ -61,6 +61,7 @@ namespace AttendanceApi
             //{
             //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             //}).AddJwtBearer(o =>
             //{
             //    o.Authority = "https://localhost:49333";
@@ -68,13 +69,14 @@ namespace AttendanceApi
             //    o.RequireHttpsMetadata = false;
             //});
 
-            services.AddAuthentication("Bearer")
-            .AddIdentityServerAuthentication(options =>
-            {
-                options.Authority = "https://localhost:49333";
-                //options.RequireHttpsMetadata = false;
-                options.ApiName = "AttendanceApi";
-            });
+            //Using identity server 4
+            //services.AddAuthentication("Bearer")
+            //.AddIdentityServerAuthentication(options =>
+            //{
+            //    options.Authority = "https://localhost:49333";
+            //    //options.RequireHttpsMetadata = false;
+            //    options.ApiName = "AttendanceApi";
+            //});
 
             AddMongoDBRelatedServices(services);
         }
@@ -106,8 +108,7 @@ namespace AttendanceApi
                 app.UseHsts();
             }
             app.UseMiddleware<SerilogMiddleware>();
-            app.UseAuthentication();
-            app.UseHttpsRedirection();
+            //app.UseAuthentication();
             app.UseMvc();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Models.Core.Authentication;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Models.Core.Employment
@@ -11,7 +12,7 @@ namespace Models.Core.Employment
         [BsonDateTimeOptions]
         public DateTime JoiningDate { get; set; }
 
-        public Credential Credentials { get; set; }
+        public List<UserRole> Roles { get; set; }
 
         public int BusinessGroup { get; set; }
 
@@ -25,5 +26,9 @@ namespace Models.Core.Employment
 
         public List<int> Reportees { get; set; } = new List<int>();
 
+        public bool HasRole(UserRole role)
+        {
+            return Roles.Contains(role);
+        }
     }
 }

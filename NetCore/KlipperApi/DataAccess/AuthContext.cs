@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Common.DataAccess;
+using Microsoft.Extensions.Options;
 using Models.Core.Authentication;
 using MongoDB.Driver;
 
-namespace AuthServer.DataAccess.Database
+namespace KlipperApi.DataAccess
 {
     public class AuthContext
     {
@@ -30,9 +31,5 @@ namespace AuthServer.DataAccess.Database
         }
 
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
-
-        //Currently unused collections
-        //public IMongoCollection<Role> Roles => _database.GetCollection<Role>("Roles");
-        //public IMongoCollection<Permission> Permissions => _database.GetCollection<Permission>("Permissions");
     }
 }

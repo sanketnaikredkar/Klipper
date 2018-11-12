@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Models.Core.Authentication
+namespace Models.Framework.Authentication
 {
     public class Credential
     {

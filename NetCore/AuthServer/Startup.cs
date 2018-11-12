@@ -114,7 +114,7 @@ namespace AuthServer
 
             app.UseMiddleware<SerilogMiddleware>();
             app.UseIdentityServer();
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvc();
         }

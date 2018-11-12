@@ -12,7 +12,7 @@ namespace AttendanceApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class AccessPointsController : ControllerBase
     {
         private readonly IAccessPointRepository _repository = null;

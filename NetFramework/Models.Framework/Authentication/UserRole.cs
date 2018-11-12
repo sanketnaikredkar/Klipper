@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
-using Models.Core.Helpers;
+using Models.Framework.Helpers;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Models.Core.Authentication
+namespace Models.Framework.Authentication
 {
     public class UserRole
     {

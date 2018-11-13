@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Klipper.Desktop.WPF
 {
@@ -13,5 +7,21 @@ namespace Klipper.Desktop.WPF
     /// </summary>
     public partial class App : Application
     {
+        private void OnApplicationStartup(object sender, StartupEventArgs e)
+        {
+            if(!LoginExists())
+            {
+                new LoginLauncher().Launch();
+            }
+            else
+            {
+                new ApplicationLauncher().Launch();
+            }
+        }
+
+        private bool LoginExists()
+        {
+            return false;
+        }
     }
 }

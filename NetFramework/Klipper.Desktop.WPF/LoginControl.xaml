@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Klipper.Desktop.WPF"
              xmlns:textboxes="clr-namespace:Sparkle.Controls.TextBoxes;assembly=Sparkle"
-             mc:Ignorable="d"
-             MaxHeight="500" MaxWidth="250">
+             xmlns:buttons="clr-namespace:Sparkle.Controls.Buttons;assembly=Sparkle"
+             mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -29,8 +29,8 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition MinWidth="100"/>
+            <ColumnDefinition MinWidth="150"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
@@ -73,25 +73,46 @@
         <textboxes:StringInputTextBox
                     Grid.Row="2" Grid.Column="1"
                     RegEx="^[a-zA-Z\.]{2,30}$"
-                    Margin="15 2" 
+                    Margin="16 2" 
                     FontSize="16"
                     HorizontalAlignment="Stretch"
-                    Width="150"
                     Foreground="YellowGreen"
-                    Style="{StaticResource SparkTextBoxStyleWithErrorTemplate}">
+                    Style="{StaticResource SparkTextBoxStyleWithErrorTemplate}"
+                    Background="{DynamicResource BackgroundBase_05}"
+                    BorderBrush="{DynamicResource BackgroundBase_05}"
+                    TextAlignment="Left">
         </textboxes:StringInputTextBox>
 
         <textboxes:StringInputTextBox
                     Grid.Row="3" Grid.Column="1"
-                    RegEx="^[a-zA-Z\.]{2,30}$"
-                    Margin="15 2" 
+                    Margin="16 2" 
                     FontSize="16"
                     HorizontalAlignment="Stretch"
-                    Width="150"
                     Foreground="YellowGreen"
-                    Style="{StaticResource SparkTextBoxStyleWithErrorTemplate}">
+                    Style="{StaticResource SparkTextBoxStyleWithErrorTemplate}"
+                    Background="{DynamicResource BackgroundBase_05}"
+                    BorderBrush="{DynamicResource BackgroundBase_05}"
+                    TextAlignment="Left">
         </textboxes:StringInputTextBox>
-
+        <buttons:PanelButton 
+                    Grid.Row="4" Grid.Column="1"
+                    Margin="10 0"
+                    HorizontalAlignment="Right"
+                    ButtonText="Login"
+                    Clicked="Login_Clicked"/>
+        
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                   Text="Forgot password?"
+                   FontSize="10"
+                   FontStyle="Italic"
+                   FontFamily="Segoe UI"
+                   Foreground="LightSeaGreen"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   x:Name="ForgotPasswordLabel"
+                   Cursor="Hand"
+                   MouseLeftButtonUp="ForgotPasswordLabel_MouseLeftButtonUp"
+                   Margin="10 0"/>
 
     </Grid>
 </UserControl>

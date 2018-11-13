@@ -31,7 +31,8 @@ namespace Klipper.Desktop.WPF
                 control,
                 50, true, true, null, null)
             {
-                ShowHeaderPanel = true
+                ShowHeaderPanel = true,
+                ShowTickButton = false
             };
 
             //dialog.KeyUp += (s, args) =>

@@ -27,5 +27,15 @@ namespace Klipper.Desktop.WPF
         {
             InitializeComponent();
         }
+
+        private void Login_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ForgotPasswordLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

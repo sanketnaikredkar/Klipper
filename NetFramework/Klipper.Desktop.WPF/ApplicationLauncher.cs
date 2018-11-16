@@ -9,6 +9,7 @@ using Sparkle.Controls.Buttons;
 using Sparkle.DataStructures;
 using Sparkle.Controls.Navigators;
 using System.Windows.Controls;
+using Klipper.Desktop.WPF.Controls;
 
 namespace Klipper.Desktop.WPF
 {
@@ -30,7 +31,8 @@ namespace Klipper.Desktop.WPF
                 BottomStripHeight = 5,
                 WindowHeaderIcon = (ImageSource)new ImageSourceConverter().ConvertFromString("./Images/Klingelnberg/Klingelnberg_Logo.png"),
                 WindowHeader = "Klipper",
-                ShowSideToolbar = true
+                ShowSideToolbar = true,
+                WindowState = WindowState.Normal
             };
             LoadNavigator(w);
             LoadTopPanel(w);
@@ -80,14 +82,8 @@ namespace Klipper.Desktop.WPF
             var t = w.TopPanel;
             t.Loaded += (s, e) =>
             {
-                var iconSize = 35.0;
-                w.TopToolContainer.Children.Add(GetToolbarButton("Krypton/ApplicationManager", iconSize, () => { MessageBox.Show("Launch application manager clicked."); }, "Launch Application manager"));
-                w.TopToolContainer.Children.Add(GetToolbarButton("Krypton/Komet5", iconSize, () => { MessageBox.Show("Launch Komet 5.0 clicked."); }, "Launch Komet 5.0"));
-                w.TopToolContainer.Children.Add(GetToolbarButton("Krypton/StylusManager", iconSize, () => { MessageBox.Show("Launch stylus manager clicked."); }, "Launch Stylus manager"));
-                w.TopToolContainer.Children.Add(new VerticalSeparator() { ColorBrush = AppearanceManager.GetCurrentSkinResource("BackgroundBase_12") as Brush });
-                w.TopToolContainer.Children.Add(GetToolbarButton("Krypton/MountingDistance", iconSize, () => { MessageBox.Show("Update mounting distance clicked."); }, "Update mounting distance"));
-                w.TopToolContainer.Children.Add(new VerticalSeparator() { ColorBrush = AppearanceManager.GetCurrentSkinResource("BackgroundBase_12") as Brush });
-                w.TopToolContainer.Children.Add(GetToolbarButton("Krypton/Save", iconSize, () => { MessageBox.Show("Save drawing changes clicked."); }, "Save drawing changes"));
+                //var iconSize = 35.0;
+                //w.TopToolContainer.Children.Add(GetToolbarButton("Krypton/Save", iconSize, () => { MessageBox.Show("Save drawing changes clicked."); }, "Save drawing changes"));
             };
         }
 
@@ -120,20 +116,20 @@ namespace Klipper.Desktop.WPF
 
         private void LoadMenuItems(HamburgerNavigator n)
         {
-            var strs = new Dictionary<string, string>() {
-                { "Home", "Klingelnberg_building.jpg" },
-                { "Data", "klingelnberg_office.jpg" },
-                { "Measurements", "P40.png" },
-                { "Reports", "SpeedViper300.png" },
-                { "Analysis", "G60.png" },
-                { "Settings", "TM_65.png" },
-                { "Help", "Klingelnberg_Drive_Technology.png" },
+            var strs = new Dictionary<string, UserControl>() {
+                { "Home", new HomeControl() },
+                { "Attendance", new AttendanceControl() },
+                { "Leaves", new LeavesControl() },
+                { "Documents", new DocumentsControl() },
+                { "Admin", new AdminControl() },
+                { "Settings", new SettingsControl() },
+                { "Help", new HelpControl() },
             };
 
             foreach (var k in strs.Keys)
             {
-                var imageName = strs[k];
-                var item = new SelectableItem(k, GetControl(imageName), "./Images/Generic/" + k + "_white.png")
+                var control = strs[k];
+                var item = new SelectableItem(k, control, "./Images/Generic/" + k + "_white.png")
                 {
                     IconHeight = 35,
                     IconWidth = 35,

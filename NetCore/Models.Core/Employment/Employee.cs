@@ -7,18 +7,18 @@ namespace Models.Core.Employment
 {
     public class Employee : Person
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = "";
 
         [BsonDateTimeOptions]
         public DateTime JoiningDate { get; set; }
 
-        public List<UserRole> Roles { get; set; }
+        public List<string> Roles { get; set; } = new List<string>();
 
-        public int BusinessGroup { get; set; }
+        public int DepartmentId { get; set; }
 
-        public int Department { get; set; }
+        //public List<int> OtherAssociatedDepartments { get; set; } = new List<int>();
 
-        public int SubDivision { get; set; }
+        public int SubDivisionId { get; set; }
 
         public DateTime LastUpdatedOn { get; set; } = DateTime.Now;
 
@@ -26,9 +26,33 @@ namespace Models.Core.Employment
 
         public List<int> Reportees { get; set; } = new List<int>();
 
-        public bool HasRole(UserRole role)
+        [BsonDateTimeOptions]
+        public DateTime LeavingDate { get; set; }
+
+        public string ProvidentFundNumber { get; set; } = "'MH/PUN/305790/XXX";
+        public string ProvidentFundUANNumber { get; set; } = "000000000000";
+        public string PANNumber { get; set; } = "ABCDEFGHIJK";
+        public string AadharNumber { get; set; } = "XXXX YYYY ZZZZ";
+
+        public List<string> CompanyCreditCards { get; set; } = new List<string>();
+
+        public bool HasRole(string role)
         {
             return Roles.Contains(role);
         }
+
+        public bool IsInActiveService()
+        {
+            if(LeavingDate.Year == 1 && LeavingDate.Month == 1 && LeavingDate.Day == 1)
+            {
+                return true;
+            }
+            if(LeavingDate < DateTime.Now)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

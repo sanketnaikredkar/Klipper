@@ -158,11 +158,13 @@ namespace EmployeeApi.DataAccess.Implementation
 
         public async Task<bool> Exists(int id)
         {
-            var filter = Builders<Employee>.Filter.Eq(s => s.ID, id);
+            var filter = Builders<Employee>.Filter.Eq("ID", id);
             try
             {
-                var r = await _context.Employees.FindAsync(filter);
-                if(r.Current.GetEnumerator().Current == null)
+                var e = await _context.Employees
+                .Find(filter)
+                .FirstOrDefaultAsync();
+                if(e == null)
                 {
                     return false;
                 }

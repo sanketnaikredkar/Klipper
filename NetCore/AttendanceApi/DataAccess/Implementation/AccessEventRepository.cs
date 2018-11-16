@@ -51,6 +51,22 @@ namespace AttendanceApi.DataAccess.Implementation
                 throw ex;
             }
         }
+        public async Task<IEnumerable<AccessEvent>> GetByEmployeeId(int employeeId)
+        {
+            try
+            {
+                var filter = Builders<AccessEvent>.Filter.Eq("EmployeeID", employeeId);
+
+                return await _context.AccessEvents
+                                .Find(filter)
+                                .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning("Something went wrong while accessing AccessEvents with EmployeeID {@EmployeeID}.", employeeId);
+                throw ex;
+            }
+        }
 
         public async Task<bool> Add(AccessEvent item)
         {

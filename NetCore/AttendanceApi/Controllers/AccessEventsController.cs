@@ -56,6 +56,26 @@ namespace AttendanceApi.Controllers
             return Ok(value);
         }
 
+        // GET api/accessevents/byEmployeeId?employeeId=5
+        [HttpGet("byEmployeeId")]
+        public IActionResult GetByEmployeeId(int employeeId)
+        {
+            if (employeeId < 0)
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var value = _repository.GetByEmployeeId(employeeId).Result;
+            if (value == null)
+            {
+                return NotFound();
+            }
+            return Ok(value);
+        }
+
         // POST api/AccessEvents
         [HttpPost]
         public IActionResult Post([FromBody] AccessEvent value)

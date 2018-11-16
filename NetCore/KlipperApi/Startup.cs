@@ -1,5 +1,6 @@
 ﻿using Common.DataAccess;
 using Common.Logging;
+using KlipperApi.Controllers.Attendance;
 using KlipperApi.DataAccess;
 using KlipperApi.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -30,13 +31,13 @@ namespace KlipperApi
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("AuthorizationPolicies.json", optional: true, reloadOnChange: true)
+                //.AddJsonFile("AuthorizationPolicies.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
 
             Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Async(a => a.File("KlipperApi_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
+                    .WriteTo.Async(a => a.File("KlipperApi_log_.log", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
                     .Enrich.FromLogContext()
                     .MinimumLevel.ControlledBy(new LoggingLevelSwitch() { MinimumLevel = LogEventLevel.Information })
                     .Enrich.WithEnvironmentUserName()
@@ -85,7 +86,8 @@ namespace KlipperApi
                 .AddDefaultTokenProviders();
 
             services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IEmployeeManager, EmployeeManager>();
+            services.AddSingleton<IEmployeeAccessor, EmployeeAccessor>();
+            services.AddSingleton<IAttendanceAccessor, AttendanceAccessor>();
 
             services.AddAuthentication(options =>
                 {
@@ -109,9 +111,9 @@ namespace KlipperApi
 
             // Sets up the PolicyServer client library and policy provider - 
             //configuration is loaded from AuthorizationPolicies.json
-            IConfiguration configSection = Configuration.GetSection("Policy");
-            services.AddPolicyServerClient(configSection)
-                .AddAuthorizationPermissionPolicies();
+            //IConfiguration configSection = Configuration.GetSection("Policy");
+            //services.AddPolicyServerClient(configSection)
+            //    .AddAuthorizationPermissionPolicies();
 
             // Adds the necessary handler for our custom additional requirements
             services.AddTransient<IPolicyEvaluator, PolicyEvaluator>();
@@ -137,7 +139,7 @@ namespace KlipperApi
             // add this middleware to make roles and permissions available as claims
             // this is mainly useful for using the classic [Authorize(Roles="foo")] and IsInRole functionality
             // this is not needed if you use the client library directly or the new policy-based authorization framework in ASP.NET Core
-            app.UsePolicyServerClaims();
+            //app.UsePolicyServerClaims();
             app.UseMiddleware<SerilogMiddleware>();
             app.UseAuthentication();
             //app.UseHttpsRedirection();

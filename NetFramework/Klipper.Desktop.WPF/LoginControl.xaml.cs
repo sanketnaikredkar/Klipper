@@ -1,41 +1,75 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Klipper.Desktop.WPF
 {
     /// <summary>
     /// Interaction logic for LoginControl.xaml
     /// </summary>
-    public partial class LoginControl : UserControl
+    public partial class LoginControl : UserControl, INotifyPropertyChanged
     {
-        public event EventHandler<Tuple<string, string>> LoginAttempted;
-        public event EventHandler<string> PasswordForgotten;
+        public event EventHandler Closed;
 
         public LoginControl()
         {
             InitializeComponent();
         }
 
+        #region INotifyPropertyChanged 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        #region Properties
+        public bool ShouldEnableLoginButton
+        {
+            get
+            {
+                return !String.IsNullOrWhiteSpace(UsernameTextbox.Text) && !String.IsNullOrWhiteSpace(UsernameTextbox.Text);
+            }
+        }
+        #endregion
+
         private void Login_Clicked(object sender, EventArgs e)
         {
+            var username = UsernameTextbox.Text;
+            var password = PasswordTextbox.Text;
 
+            var success = LoginLauncher.Login(username, password);
+            if(success)
+            {
+                new ApplicationLauncher().Launch();
+                Closed?.Invoke(this, null);
+            }
+            else
+            {
+                MessageBox.Show("Username or password is incorrect!");
+            }
         }
 
         private void ForgotPasswordLabel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            LoginLauncher.OnPasswordForgotten(UsernameTextbox.Text);
+        }
 
+        private void PasswordTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RaisePropertyChanged("ShouldEnableLoginButton");
+        }
+
+        private void UsernameTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RaisePropertyChanged("ShouldEnableLoginButton");
         }
     }
 }

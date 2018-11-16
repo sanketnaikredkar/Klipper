@@ -10,6 +10,8 @@ namespace AttendanceApi.DataAccess.Interfaces
 
         Task<AccessEvent> Get(int id);
 
+        Task<IEnumerable<AccessEvent>> GetByEmployeeId(int employeeId);
+
         Task<bool> Exists(int id);
 
         Task<bool> Add(AccessEvent item);

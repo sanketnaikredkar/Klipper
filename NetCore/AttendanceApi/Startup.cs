@@ -28,7 +28,7 @@ namespace AttendanceApi
 
             Log.Logger = new LoggerConfiguration()
                     //.ReadFrom.Configuration(Configuration)
-                    .WriteTo.Async(a => a.File("AttendanceApi_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
+                    .WriteTo.Async(a => a.File("AttendanceApi_log_.log", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
                     .Enrich.FromLogContext()
                     .MinimumLevel.ControlledBy(new LoggingLevelSwitch() { MinimumLevel = LogEventLevel.Information })
                     .Enrich.WithEnvironmentUserName()

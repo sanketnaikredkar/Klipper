@@ -3,7 +3,7 @@
     "roles": [
       {
         "name": "HR",
-        "subjects": [ "1", "2" ],
+        "subjects": [ "32" ],
         "identityRoles": [ "LeaveApprover", "NormalUser", "AttendanceMonitor" ]
       },
       {
@@ -17,6 +17,7 @@
       },
       {
         "name": "Admin",
+        "subjects": [ "29" ],
         "identityRoles": [ "UserManager", "NormalUser" ]
       }
     ],

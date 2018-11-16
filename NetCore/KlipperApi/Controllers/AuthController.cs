@@ -2,12 +2,10 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Models.Core.Authentication;
 using KlipperApi.DataAccess;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,21 +18,20 @@ namespace KlipperApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    [AllowAnonymous]
     public class AuthController : Controller
     {
         private readonly IUserRepository _userRepository;
-        private readonly IEmployeeManager _employeeManager;
+        private readonly IEmployeeAccessor _employeeAccessor;
 
-        public AuthController(IUserRepository userRepository, IEmployeeManager employeeManager)
+        public AuthController(IUserRepository userRepository, IEmployeeAccessor employeeAccessor)
         {
             _userRepository = userRepository;
-            _employeeManager = employeeManager;
+            _employeeAccessor = employeeAccessor;
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         [Route("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] User user)
         {
             if(_userRepository.GetByUserName(user.UserName) == null)
@@ -45,6 +42,8 @@ namespace KlipperApi.Controllers
 
             if (_userRepository.ValidateCredentials(user.UserName, user.PasswordHash))
             {
+                var returnedUser = _userRepository.GetByUserName(user.UserName).Result;
+
                 // only set explicit expiration here if persistent. 
                 // otherwise we reply upon expiration configured in cookie middleware.
                 var props = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
@@ -53,16 +52,16 @@ namespace KlipperApi.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddDays(3650)
                 };
 
-                var employee = _employeeManager.GetEmployeeAsync(user.ID).Result;
+                var employee = await _employeeAccessor.GetEmployeeAsync(returnedUser.ID);
                 var roles = employee.Roles;
 
                 var claims = new List<Claim>();
 
                 foreach (var r in roles)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, r.Role, ClaimValueTypes.String));
+                    claims.Add(new Claim(ClaimTypes.Role, r, ClaimValueTypes.String));
                 }
-                claims.Add(new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String));
+                claims.Add(new Claim(ClaimTypes.Email, employee.Email, ClaimValueTypes.String));
                 claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserName));
                 claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
 
@@ -76,18 +75,12 @@ namespace KlipperApi.Controllers
                     signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
                     );
 
-                //KK: Also try this...
-                //var currentUser = _userRepository.GetByUserName(user.UserName);
-                //await AuthenticationHttpContextExtensions.SignInAsync(claimsPrincipal);
-
-                var subjectId = user.ID.ToString();
-                await HttpContext.SignInAsync(subjectId, claims.ToArray());
-
                 return Ok(new
-                    {
-                        token = new JwtSecurityTokenHandler().WriteToken(token),
-                        expiration = token.ValidTo
-                    });
+                {
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Expiration = token.ValidTo,
+                    Username = user.UserName
+                });
             }
             ModelState.AddModelError("", "Error in user authentication");
             Serilog.Log.Logger.Error("Error in user authentication");
@@ -96,7 +89,6 @@ namespace KlipperApi.Controllers
         }
 
         //[HttpPost]
-        //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> Logout()
         //{
         //    await HttpContext.SignOutAsync();

@@ -29,7 +29,7 @@ namespace AuthServer
             Configuration = builder.Build();
 
             Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Async(a => a.File("AuthSever_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
+                    .WriteTo.Async(a => a.File("AuthSever_log_.log", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
                     .Enrich.FromLogContext()
                     .MinimumLevel.ControlledBy(new LoggingLevelSwitch() { MinimumLevel = LogEventLevel.Warning })
                     .Enrich.WithEnvironmentUserName()

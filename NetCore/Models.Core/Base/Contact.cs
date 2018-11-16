@@ -10,7 +10,7 @@ namespace Models.Core
     {
         [BsonId]
         [JsonConverter(typeof(ObjectIdConverter))]
-        public ObjectId _objetId { get; set; }
+        public ObjectId _objectId { get; set; }
 
         public int ID { get; set; }
 

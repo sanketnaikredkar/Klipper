@@ -8,11 +8,10 @@ namespace Models.Core
 {
     public class Address
     {
-        [BsonId]
-        [JsonConverter(typeof(ObjectIdConverter))]
-        public ObjectId _objetId { get; set; }
-
         public int ID { get; set; }
+
+        [StringLength(25)]
+        public string Unit { get; set; }
 
         [StringLength(25)]
         public string Building { get; set; }
@@ -36,7 +35,6 @@ namespace Models.Core
         public string Country { get; set; }
 
         [StringLength(15)]
-        [DataType(DataType.PostalCode)]
         public string ZipCode { get; set; }
 
         [DataType(DataType.Url)]

@@ -7,8 +7,8 @@
     <ProjectGuid>{E06E7D98-0D23-4E9B-82D4-0489641AE7C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core.Models</RootNamespace>
-    <AssemblyName>Core.Models</AssemblyName>
+    <RootNamespace>Models.Framework</RootNamespace>
+    <AssemblyName>Models.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -105,26 +105,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\Credential.cs" />
-    <Compile Include="Authentication\User.cs" />
-    <Compile Include="Authentication\UserRole.cs" />
-    <Compile Include="Business\Company.cs" />
-    <Compile Include="Core\Address.cs" />
-    <Compile Include="Core\Contact.cs" />
-    <Compile Include="Core\SocialProfile.cs" />
-    <Compile Include="Helpers\ObjectIdConverter.cs" />
-    <Compile Include="HR\Attendance\AccessEvent.cs" />
-    <Compile Include="HR\Attendance\AccessPoint.cs" />
-    <Compile Include="HR\Attendance\Leave.cs" />
-    <Compile Include="HR\Attendance\MonthlyAccessLog.cs" />
-    <Compile Include="HR\Attendance\Regularization.cs" />
-    <Compile Include="MyCompany.cs" />
-    <Compile Include="Core\Organization.cs" />
-    <Compile Include="Employment\Employee.cs" />
-    <Compile Include="Core\Core.cs" />
-    <Compile Include="Core\Person.cs" />
-    <Compile Include="Operationals\Department.cs" />
-    <Compile Include="Operationals\Operations.cs" />
+    <Compile Include="..\..\NetCore\Models.Core\Authentication\User.cs">
+      <Link>Authentication\User.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Authentication\UserRole.cs">
+      <Link>Authentication\UserRole.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Base\Address.cs">
+      <Link>Base\Address.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Base\Contact.cs">
+      <Link>Base\Contact.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Base\Organization.cs">
+      <Link>Base\Organization.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Base\Person.cs">
+      <Link>Base\Person.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Base\SocialProfile.cs">
+      <Link>Base\SocialProfile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Base\UserAction.cs">
+      <Link>Base\UserAction.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Employment\Employee.cs">
+      <Link>Employment\Employee.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Helpers\ObjectIdConverter.cs">
+      <Link>Helpers\ObjectIdConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\HR\Attendance\AccessEvent.cs">
+      <Link>HR\Attendance\AccessEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\HR\Attendance\AccessPoint.cs">
+      <Link>HR\Attendance\AccessPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\HR\Attendance\Leave.cs">
+      <Link>HR\Attendance\Leave.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\HR\Attendance\LeaveRecord.cs">
+      <Link>HR\Attendance\LeaveRecord.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\HR\Attendance\MonthlyAccessLog.cs">
+      <Link>HR\Attendance\MonthlyAccessLog.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\HR\Attendance\Regularization.cs">
+      <Link>HR\Attendance\Regularization.cs</Link>
+    </Compile>
+    <Compile Include="..\..\NetCore\Models.Core\Operationals\Department.cs">
+      <Link>Operationals\Department.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

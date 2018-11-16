@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Models.Core.Helpers;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 

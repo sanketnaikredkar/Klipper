@@ -1,15 +1,11 @@
-﻿using Models.Framework.Employment;
-using Models.Framework.HR.Attendance;
-using Models.Framework.Operationals;
+﻿using Models.Core.Employment;
+using Models.Core.HR.Attendance;
+using Models.Core.Operationals;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace AttendanceDataExtractor
 {
@@ -171,7 +167,7 @@ namespace AttendanceDataExtractor
                 }
 
                 emp.ID = int.Parse(code);
-                emp.Department = int.Parse(row[DepartmentId].ToString());
+                emp.DepartmentId = int.Parse(row[DepartmentId].ToString());
 
                 var name = row[EmployeeName].ToString();
                 var tokens = name.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
@@ -179,7 +175,7 @@ namespace AttendanceDataExtractor
                 emp.LastName = name.Substring(tokens[0].Length).Trim();
 
                 var gender = row[Gender].ToString();
-                emp.Gender = gender == "Male" ? Models.Framework.Gender.Male : Models.Framework.Gender.Female;
+                emp.Gender = gender == "Male" ? Models.Core.Gender.Male : Models.Core.Gender.Female;
 
                 employees.Add(emp);
             }

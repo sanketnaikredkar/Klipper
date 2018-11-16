@@ -1,6 +1,6 @@
-﻿using Models.Framework.Employment;
-using Models.Framework.HR.Attendance;
-using Models.Framework.Operationals;
+﻿using Models.Core.Employment;
+using Models.Core.HR.Attendance;
+using Models.Core.Operationals;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -55,14 +55,14 @@ namespace AttendanceDataExtractor
             _accessPointsCollection = _database.GetCollection<AccessPoint>("AccessPoints");
             _accessEventsCollection = _database.GetCollection<AccessEvent>("AccessEvents");
 
-            //foreach (var v in Departments)
-            //{
-            //    AddDepartment(v);
-            //}
-            //foreach (var v in Employees)
-            //{
-            //    AddEmployee(v);
-            //}
+            foreach (var v in Departments)
+            {
+                AddDepartment(v);
+            }
+            foreach (var v in Employees)
+            {
+                AddEmployee(v);
+            }
             foreach (var v in AccessPoints)
             {
                 AddAccessPoint(v);
@@ -76,31 +76,31 @@ namespace AttendanceDataExtractor
             }
         }
 
-        //static public IEnumerable<Department> GetAllDepartments()
-        //{
-        //    try
-        //    {
-        //        return _departmentsCollection.Find(_ => true).ToList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // log or manage the exception
-        //        throw ex;
-        //    }
-        //}
+        static public IEnumerable<Department> GetAllDepartments()
+        {
+            try
+            {
+                return _departmentsCollection.Find(_ => true).ToList();
+            }
+            catch (Exception ex)
+            {
+                // log or manage the exception
+                throw ex;
+            }
+        }
 
-        //static public IEnumerable<Employee> GetAllEmployees()
-        //{
-        //    try
-        //    {
-        //        return _employeesCollection.Find(_ => true).ToList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // log or manage the exception
-        //        throw ex;
-        //    }
-        //}
+        static public IEnumerable<Employee> GetAllEmployees()
+        {
+            try
+            {
+                return _employeesCollection.Find(_ => true).ToList();
+            }
+            catch (Exception ex)
+            {
+                // log or manage the exception
+                throw ex;
+            }
+        }
 
         static public IEnumerable<AccessPoint> GetAllAccessPoints()
         {
@@ -128,45 +128,45 @@ namespace AttendanceDataExtractor
             }
         }
 
-        //static void AddDepartment(Department item)
-        //{
-        //    try
-        //    {
-        //        var existing = GetAllDepartments();
-        //        foreach(var d in existing)
-        //        {
-        //            if(d.ID == item.ID)
-        //            {
-        //                return;
-        //            }
-        //        }
-        //        _departmentsCollection.InsertOne(item);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+        static void AddDepartment(Department item)
+        {
+            try
+            {
+                var existing = GetAllDepartments();
+                foreach (var d in existing)
+                {
+                    if (d.ID == item.ID)
+                    {
+                        return;
+                    }
+                }
+                _departmentsCollection.InsertOne(item);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        //static public void AddEmployee(Employee item)
-        //{
-        //    try
-        //    {
-        //        var existing = GetAllEmployees();
-        //        foreach (var d in existing)
-        //        {
-        //            if (d.ID == item.ID)
-        //            {
-        //                return;
-        //            }
-        //        }
-        //        _employeesCollection.InsertOne(item);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+        static public void AddEmployee(Employee item)
+        {
+            try
+            {
+                var existing = GetAllEmployees();
+                foreach (var d in existing)
+                {
+                    if (d.ID == item.ID)
+                    {
+                        return;
+                    }
+                }
+                _employeesCollection.InsertOne(item);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         static public void AddAccessPoint(AccessPoint item)
         {

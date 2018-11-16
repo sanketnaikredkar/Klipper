@@ -8,7 +8,7 @@ namespace Models.Core.HR.Attendance
     public class MonthlyAccessLog
     {
         [BsonId]
-        public ObjectId _objetId { get; set; }
+        public ObjectId _objectId { get; set; }
 
         [BsonDateTimeOptions]
         public DateTime Month { get; set; }

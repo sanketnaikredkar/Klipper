@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Klipper.Desktop.WPF"
              xmlns:textboxes="clr-namespace:Sparkle.Controls.TextBoxes;assembly=Sparkle"
              xmlns:buttons="clr-namespace:Sparkle.Controls.Buttons;assembly=Sparkle"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -30,7 +31,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="100"/>
-            <ColumnDefinition MinWidth="150"/>
+            <ColumnDefinition MinWidth="200"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
@@ -71,6 +72,8 @@
                    Margin="10 0"/>
 
         <textboxes:StringInputTextBox
+            x:Name="UsernameTextbox"
+                    Text="Gourav.Joshi"
                     Grid.Row="2" Grid.Column="1"
                     RegEx="^[a-zA-Z\.]{2,30}$"
                     Margin="16 2" 
@@ -80,10 +83,13 @@
                     Style="{StaticResource SparkTextBoxStyleWithErrorTemplate}"
                     Background="{DynamicResource BackgroundBase_05}"
                     BorderBrush="{DynamicResource BackgroundBase_05}"
+                    TextChanged="UsernameTextbox_TextChanged"
                     TextAlignment="Left">
         </textboxes:StringInputTextBox>
 
         <textboxes:StringInputTextBox
+            x:Name="PasswordTextbox"
+                    Text="Gourav$xyz987"
                     Grid.Row="3" Grid.Column="1"
                     Margin="16 2" 
                     FontSize="16"
@@ -92,6 +98,7 @@
                     Style="{StaticResource SparkTextBoxStyleWithErrorTemplate}"
                     Background="{DynamicResource BackgroundBase_05}"
                     BorderBrush="{DynamicResource BackgroundBase_05}"
+                    TextChanged="PasswordTextbox_TextChanged"
                     TextAlignment="Left">
         </textboxes:StringInputTextBox>
         <buttons:PanelButton 
@@ -99,6 +106,7 @@
                     Margin="10 0"
                     HorizontalAlignment="Right"
                     ButtonText="Login"
+                    IsEnabled="{Binding ShouldEnableLoginButton}"
                     Clicked="Login_Clicked"/>
         
         <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"

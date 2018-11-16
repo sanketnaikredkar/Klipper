@@ -27,7 +27,7 @@ namespace EmployeeApi
             Configuration = builder.Build();
 
             Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Async(a => a.File("PeopleApi_log_.txt", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
+                    .WriteTo.Async(a => a.File("PeopleApi_log_.log", rollingInterval: RollingInterval.Day, rollOnFileSizeLimit: true), blockWhenFull: true)
                     .Enrich.FromLogContext()
                     .MinimumLevel.ControlledBy(new LoggingLevelSwitch() { MinimumLevel = LogEventLevel.Information })
                     .Enrich.WithEnvironmentUserName()

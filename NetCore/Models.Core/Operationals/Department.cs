@@ -11,15 +11,19 @@ namespace Models.Core.Operationals
     {
         [JsonConverter(typeof(ObjectIdConverter))]
         [BsonId]
-        public ObjectId _objetId { get; set; }
+        public ObjectId _objectId { get; set; }
 
         public int ID { get; set; }
 
+        public int ParentDepartmentID { get; set; }
+
         public string Name { get; set; }
 
-        //public List<Employee> Employees { get; set; }
+        public List<int> Employees { get; set; } = new List<int>();
 
-        //public Operations Operations { get; set; }
+        public List<int> SubDepartments { get; set; } = new List<int>();
+
+        public int DepartmentHeadEmployeeId { get; set; } = -1;
 
     }
 }

@@ -30,38 +30,31 @@ namespace KlipperApi.Controllers.Attendance
             _attendanceAccessor = attendanceAccessor;
         }
 
-        //// GET: api/Attendance
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        // GET: api/Attendance/5
-        [HttpPost]
+        [Route("{employeeId}/{startDate}/{endDate}")]
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Get([FromBody] dynamic data)
+        public async Task<IActionResult> Get(int employeeId, string startDate, string endDate)
         {
-            int id = data.id;
-            DateTime startdate = data.startdate;
-            DateTime enddate = data.enddate;
+            var start = DateTime.Parse(startDate);
+            var end = DateTime.Parse(endDate);
 
             var roleClaims = User.Claims.Where(c => c.Type == ClaimTypes.Role).ToList();
             bool isHR = roleClaims.Where(c => c.Value == "HR").First() != null;
             bool isTeamLeader = roleClaims.Where(c => c.Value == "TeamLeader").First() != null;
             bool isEmployee = roleClaims.Where(c => c.Value == "Employee").First() != null;
 
+
             if (isHR)
             {
-                return await GetAttendance_HR(id, startdate, enddate);
+                return await GetAttendance_HR(employeeId, start, end);
             }
             if (isTeamLeader)
             {
-                return await GetAttendance_TeamLeader(id, startdate, enddate);
+                return await GetAttendance_TeamLeader(employeeId, start, end);
             }
             if (isEmployee)
             {
-                return await GetAttendance_Employee(id, startdate, enddate);
+                return await GetAttendance_Employee(employeeId, start, end);
             }
             return NotFound();
         }
@@ -83,10 +76,7 @@ namespace KlipperApi.Controllers.Attendance
                 .Where(e => e.EventTime >= startdate && e.EventTime <= enddate)
                 .ToList();
 
-            return Ok(new
-            {
-                events = filteredEvents
-            });
+            return Ok(filteredEvents);
         }
     }
 }

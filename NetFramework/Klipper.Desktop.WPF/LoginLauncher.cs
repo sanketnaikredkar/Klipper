@@ -42,6 +42,7 @@ namespace Klipper.Desktop.WPF
 
             dialog.ShowCloseButton = true;
             dialog.ShowMaximizeRestore = false;
+            dialog.Topmost = false;
             AppearanceManager.SetAppearance(dialog);
             dialog.Show();
         }

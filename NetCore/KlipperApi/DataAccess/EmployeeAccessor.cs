@@ -9,7 +9,7 @@ namespace KlipperApi.DataAccess
     public class EmployeeAccessor : IEmployeeAccessor
     {
         static HttpClient _client = new HttpClient() { Timeout = TimeSpan.FromMilliseconds(10000) };
-        static string _baseAddress = "https://localhost:6001/";
+        static string _baseAddress = "http://localhost:6000/";
 
         public async Task<Employee> GetEmployeeAsync(int employeeId)
         {

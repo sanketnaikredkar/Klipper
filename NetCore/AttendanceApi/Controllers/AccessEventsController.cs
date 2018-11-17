@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AttendanceApi.DataAccess.Interfaces;
 using Common.Infrastructure;
@@ -58,7 +59,7 @@ namespace AttendanceApi.Controllers
 
         // GET api/accessevents/byEmployeeId?employeeId=5
         [HttpGet("byEmployeeId")]
-        public IActionResult GetByEmployeeId(int employeeId)
+        public async Task<IActionResult> GetByEmployeeId(int employeeId)
         {
             if (employeeId < 0)
             {
@@ -68,7 +69,7 @@ namespace AttendanceApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var value = _repository.GetByEmployeeId(employeeId).Result;
+            var value = await _repository.GetByEmployeeId(employeeId);
             if (value == null)
             {
                 return NotFound();

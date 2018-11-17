@@ -39,8 +39,8 @@ namespace Klipper.Desktop.WPF
             LoadBottomPanel(w);
             LoadSideToolbar(w);
 
-            w.WindowState = System.Windows.WindowState.Maximized;
-            w.Topmost = true;
+            w.WindowState = System.Windows.WindowState.Normal;
+            w.Topmost = false;
 
             w.Show();
         }

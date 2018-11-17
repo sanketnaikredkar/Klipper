@@ -34,11 +34,12 @@ namespace Klipper.Desktop.WPF.Controls
         {
             try
             {
-                var startDate = StartDatePicker.SelectedDate;
-                var endDate = EndDatePicker.SelectedDate;
+                var startDate = StartDatePicker.SelectedDate.Value;
+                var endDate = EndDatePicker.SelectedDate.Value;
                 int employeeId = int.Parse(EmployeeIdTextbox.Text);
-                var accessEvents = GetAccessEvents(startDate, endDate, employeeId).Result;
-                if(accessEvents.Count > 0)
+                var events = GetAccessEvents(startDate, endDate, employeeId);
+                var accessEvents = (List<AccessEvent>)events;
+                if (accessEvents.Count > 0)
                 {
                     var json = JsonConvert.SerializeObject(accessEvents, Formatting.Indented);
                     var filename = "C:/Temp/accessEvents.json";
@@ -56,7 +57,7 @@ namespace Klipper.Desktop.WPF.Controls
             }
         }
 
-        private async Task<List<AccessEvent>> GetAccessEvents(DateTime? startDate, DateTime? endDate, int employeeId)
+        private IEnumerable<AccessEvent> GetAccessEvents(DateTime startDate, DateTime endDate, int employeeId)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:7000/");
@@ -64,21 +65,15 @@ namespace Klipper.Desktop.WPF.Controls
                 new System.Net.Http.Headers.AuthenticationHeaderValue(
                     "Bearer", Auth.SessionToken);
 
-            var x = new
-            {
-                id = employeeId,
-                startdate = startDate,
-                enddate = endDate
-            };
+            var startStr = startDate.Year.ToString() + "-" + startDate.Month.ToString() + "-" + startDate.Day.ToString();
+            var endStr = endDate.Year.ToString() + "-" + endDate.Month.ToString() + "-" + endDate.Day.ToString();
+            var str = "api/attendance/" + employeeId.ToString() + "/" + startStr + "/" + endStr;
 
-            var json = JsonConvert.SerializeObject(x, Formatting.Indented);
-            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PostAsync("api/attendance/", httpContent);
+            HttpResponseMessage response = client.GetAsync(str).Result;
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = response.Content.ReadAsStringAsync().Result;
-                var accessEvents = JsonConvert.DeserializeObject<List<AccessEvent>>(jsonString);
+                var accessEvents = JsonConvert.DeserializeObject<IEnumerable<AccessEvent>>(jsonString);
                 return accessEvents;
             }
             else

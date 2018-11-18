@@ -57,13 +57,14 @@ namespace KlipperApi.Controllers
 
                 var claims = new List<Claim>();
 
+                claims.Add(new Claim(ClaimTypes.Sid, employee.ID.ToString(), ClaimValueTypes.UInteger32));
+                claims.Add(new Claim(ClaimTypes.Email, employee.Email, ClaimValueTypes.Email));
+                claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserName));
+                claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
                 foreach (var r in roles)
                 {
                     claims.Add(new Claim(ClaimTypes.Role, r, ClaimValueTypes.String));
                 }
-                claims.Add(new Claim(ClaimTypes.Email, employee.Email, ClaimValueTypes.String));
-                claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserName));
-                claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
 
                 var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("KlipperSigningKey"));
 

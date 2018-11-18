@@ -43,7 +43,6 @@ namespace KlipperApi.Controllers.Attendance
             bool isTeamLeader = roleClaims.Where(c => c.Value == "TeamLeader").First() != null;
             bool isEmployee = roleClaims.Where(c => c.Value == "Employee").First() != null;
 
-
             if (isHR)
             {
                 return await GetAttendance_HR(employeeId, start, end);

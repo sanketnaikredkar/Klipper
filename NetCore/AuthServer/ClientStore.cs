@@ -5,7 +5,7 @@ using AuthServer.Configuration;
 using AuthServer.DataAccess.Database;
 using IdentityServer4.Models;
 
-namespace AuthServer.DataAccess.Stores
+namespace AuthServer
 {
     public class ClientStore : IdentityServer4.Stores.IClientStore
     {

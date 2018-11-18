@@ -53,24 +53,9 @@ namespace AuthServer
                     .AllowCredentials());
             });
 
-            services.AddMvcCore(options =>
-            {
-                // this sets up a default authorization policy for the application
-                // in this case, authenticated users are required 
-                //(besides controllers/actions that have [AllowAnonymous]
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            })
+            services.AddMvcCore()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
             .AddJsonFormatters();
-
-            services.Configure<DBConnectionSettings>(options =>
-            {
-                options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
-                options.Database = Configuration.GetSection("MongoConnection:Database").Value;
-            });
 
             services.AddIdentityServer(
                     options =>
@@ -81,20 +66,9 @@ namespace AuthServer
                     }
                 )
                 .AddDeveloperSigningCredential()
-                //.AddSigningCredential("CN-sts")
-                //.AddStorageServicesBackedByDatabase()
                 .AddJwtBearerClientAuthentication()
-                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
-                .AddStores();
 
-            // Sets up the PolicyServer client library and policy provider - 
-            //configuration is loaded from AuthorizationPolicies.json
-            IConfiguration configSection = Configuration.GetSection("Policy");
-            services.AddPolicyServerClient(configSection)
-                .AddAuthorizationPermissionPolicies();
-
-            // Adds the necessary handler for our custom additional requirements
-            services.AddCustomPolicyRequirements();
+            builder.Services.AddTransient<IClientStore, ClientStore>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -107,15 +81,8 @@ namespace AuthServer
             {
                 app.UseHsts();
             }
-            // add this middleware to make roles and permissions available as claims
-            // this is mainly useful for using the classic [Authorize(Roles="foo")] and IsInRole functionality
-            // this is not needed if you use the client library directly or the new policy-based authorization framework in ASP.NET Core
-            app.UsePolicyServerClaims();
-
             app.UseMiddleware<SerilogMiddleware>();
             app.UseIdentityServer();
-            //app.UseAuthentication();
-            app.UseStaticFiles();
             app.UseMvc();
         }
     }

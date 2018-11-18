@@ -8,7 +8,6 @@ using KlipperApi.DataAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Core.HR.Attendance;
-//using PolicyServer.Runtime.Client;
 
 namespace KlipperApi.Controllers.Attendance
 {

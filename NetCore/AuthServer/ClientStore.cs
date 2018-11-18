@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AuthServer.Configuration;
-using AuthServer.DataAccess.Database;
 using IdentityServer4.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace AuthServer
 {
@@ -11,9 +11,9 @@ namespace AuthServer
     {
         List<Client> _clients = new List<Client>();
 
-        public ClientStore()
+        public ClientStore(IConfiguration configuration)
         {
-            _clients = (List<Client>) AuthConfig.GetClients();
+            _clients = (List<Client>) ConfigReader.GetClients(configuration);
         }
 
         public Task<Client> FindClientByIdAsync(string clientId)

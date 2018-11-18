@@ -1,5 +1,4 @@
-﻿using AuthServer.DataAccess.Database;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -7,11 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
-using AuthServer.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using AuthServer.DataAccess;
 using Common.Logging;
+using IdentityServer4.Stores;
+using AuthServer.Configuration;
 
 namespace AuthServer
 {
@@ -22,8 +19,7 @@ namespace AuthServer
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("AuthorizationPolicies.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("ClientApiConfig.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -67,8 +63,8 @@ namespace AuthServer
                 )
                 .AddDeveloperSigningCredential()
                 .AddJwtBearerClientAuthentication()
-
-            builder.Services.AddTransient<IClientStore, ClientStore>();
+                .AddInMemoryApiResources(ConfigReader.GetApiResources(Configuration))
+                .AddInMemoryClients(ConfigReader.GetClients(Configuration));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -14,7 +14,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 
-namespace KlipperApi.Controllers
+namespace KlipperApi.Controllers.Auth
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

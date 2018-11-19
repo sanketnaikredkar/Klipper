@@ -1,111 +1,28 @@
 ﻿{
-  "Policy": {
-    "roles": [
-      {
-        "name": "HR",
-        "subjects": [ "32" ],
-        "identityRoles": [ "LeaveApprover", "NormalUser", "AttendanceMonitor" ]
-      },
-      {
-        "name": "TeamLeader",
-        "subjects": [ "11", "12" ],
-        "identityRoles": [ "LeaveApprover", "NormalUser" ]
-      },
-      {
-        "name": "Employee",
-        "identityRoles": [ "NormalUser" ]
-      },
-      {
-        "name": "Admin",
-        "subjects": [ "29" ],
-        "identityRoles": [ "UserManager", "NormalUser" ]
-      }
-    ],
-    "permissions": [
-      {
-        "name": "ReadAttendanceForSelf",
-        "roles": [ "Employee" ]
-      },
-      {
-        "name": "ReadAttendanceForTeam",
-        "roles": [ "HR", "TeamLeader" ]
-      },
-      {
-        "name": "ReadAttendanceForAll",
-        "roles": [ "HR" ]
-      },
-      {
-        "name": "ReadLeavesForSelf",
-        "roles": [ "Employee" ]
-      },      
-      {
-        "name": "ReadLeavesForTeam",
-        "roles": [ "HR", "TeamLeader" ]
-      },      
-      {
-        "name": "ReadLeavesForAll",
-        "roles": [ "HR" ]
-      },      
-      {
-        "name": "RequestLeave",
-        "roles": [ "Employee" ]
-      },      
-      {
-        "name": "DeleteLeave",
-        "roles": [ "Employee" ]
-      },      
-      {
-        "name": "ApproveLeave",
-        "roles": [ "HR", "TeamLeader" ]
-      },      
-      {
-        "name": "RejectLeave",
-        "roles": [ "HR", "TeamLeader" ]
-      },      
-      {
-        "name": "RequestRegularization",
-        "roles": [ "Employee" ]
-      },
-      {
-        "name": "DeleteRegularization",
-        "roles": [ "Employee" ]
-      },
-      {
-        "name": "ApproveRegularization",
-        "roles": [ "HR", "TeamLeader" ]
-      },
-      {
-        "name": "RejectRegularization",
-        "roles": [ "HR", "TeamLeader" ]
-      },
-      {
-        "name": "ReadEmployeeInfo_Basic",
-        "roles": [ "Employee" ]
-      },
-      {
-        "name": "ReadSelfEmployeeInfo_Advance",
-        "roles": [ "Employee" ]
-      },
-      {
-        "name": "ReadOtherEmployeeInfo_Advance",
-        "roles": [  "HR" ]
-      },
-      {
-        "name": "UpdateSelfEmployeeInfo_Advance",
-        "roles": [  "HR" ]
-      },
-      {
-        "name": "UpdateOtherEmployeeInfo_Advance",
-        "roles": [  "HR" ]
-      },
-      {
-        "name": "CreateUpdateDeleteYearlyHolidays",
-        "roles": [  "HR" ]
-      },
-      {
-        "name": "CreateUpdateDeleteUsers",
-        "roles": [  "HR", "Admin" ]
-      }
+  "Authorization": {
+    "roles": [ "HR", "TeamLeader", "Employee", "Admin" ],
+    "Policies": [
+      "ReadAttendance",
+      "ReadLeaves",
+      "ReadRegularization",
+      "RequestLeave",
+      "DeleteLeave",
+      "ApproveLeave",
+      "RejectLeave",
+      "RequestRegularization",
+      "DeleteRegularization",
+      "ApproveRegularization",
+      "RejectRegularization",
+      "ReadEmployeeInfo_Basic",
+      "ReadEmployeeInfo_Advanced",
+      "UpdateEmployeeInfo_Basic",
+      "UpdateEmployeeInfo_Advanced",
+      "CreateUser",
+      "DeleteUser",
+      "UpdateUser",
+      "CreateHolidays",
+      "UpdateHolidays",
+      "UpdateHolidays"
     ]
   }
 }

@@ -54,5 +54,9 @@ namespace Models.Core.Employment
             return true;
         }
 
+        public bool IsReportee(int id)
+        {
+            return Reportees.Contains(id);
+        }
     }
 }

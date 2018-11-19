@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using KlipperAuthorization;
 
 namespace KlipperApi.Controllers.Auth
 {
@@ -54,6 +55,7 @@ namespace KlipperApi.Controllers.Auth
 
                 var employee = await _employeeAccessor.GetEmployeeAsync(returnedUser.ID);
                 var roles = employee.Roles;
+                SessionCache.CurrentEmployee = employee;
 
                 var claims = new List<Claim>();
 

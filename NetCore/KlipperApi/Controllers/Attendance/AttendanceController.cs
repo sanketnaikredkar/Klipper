@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using KlipperApi.DataAccess;
 using Microsoft.AspNetCore.Authorization;
@@ -18,12 +16,15 @@ namespace KlipperApi.Controllers.Attendance
         private readonly IUserRepository _userRepository;
         private readonly IEmployeeAccessor _employeeAccessor;
         private readonly IAttendanceAccessor _attendanceAccessor;
+        private readonly IAuthorizationService _authorizationService;
 
         public AttendanceController(
+            IAuthorizationService authorizationService,
             IUserRepository userRepository, 
             IEmployeeAccessor employeeAccessor,
             IAttendanceAccessor attendanceAccessor)
         {
+            _authorizationService = authorizationService;
             _userRepository = userRepository;
             _employeeAccessor = employeeAccessor;
             _attendanceAccessor = attendanceAccessor;
@@ -31,47 +32,14 @@ namespace KlipperApi.Controllers.Attendance
 
         [Route("{employeeId}/{startDate}/{endDate}")]
         [HttpGet]
-        [Authorize]
+        [Authorize(Policy = "ReadAttendance")]
         public async Task<IActionResult> Get(int employeeId, string startDate, string endDate)
         {
             var start = DateTime.Parse(startDate);
             var end = DateTime.Parse(endDate);
-
-            var roleClaims = User.Claims.Where(c => c.Type == ClaimTypes.Role).ToList();
-            bool isHR = roleClaims.Where(c => c.Value == "HR").First() != null;
-            bool isTeamLeader = roleClaims.Where(c => c.Value == "TeamLeader").First() != null;
-            bool isEmployee = roleClaims.Where(c => c.Value == "Employee").First() != null;
-
-            if (isHR)
-            {
-                return await GetAttendance_HR(employeeId, start, end);
-            }
-            if (isTeamLeader)
-            {
-                return await GetAttendance_TeamLeader(employeeId, start, end);
-            }
-            if (isEmployee)
-            {
-                return await GetAttendance_Employee(employeeId, start, end);
-            }
-            return NotFound();
-        }
-
-        private Task<IActionResult> GetAttendance_Employee(int id, DateTime startdate, DateTime enddate)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Task<IActionResult> GetAttendance_TeamLeader(int id, DateTime startdate, DateTime enddate)
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task<IActionResult> GetAttendance_HR(int id, DateTime startdate, DateTime enddate)
-        {
-            var accessEvents = await _attendanceAccessor.GetAttendanceByEmployeeIdAsync(id) as List<AccessEvent>;
+            var accessEvents = await _attendanceAccessor.GetAttendanceByEmployeeIdAsync(employeeId) as List<AccessEvent>;
             var filteredEvents = accessEvents
-                .Where(e => e.EventTime >= startdate && e.EventTime <= enddate)
+                .Where(e => e.EventTime >= start && e.EventTime <= end)
                 .ToList();
 
             return Ok(filteredEvents);

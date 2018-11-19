@@ -21,7 +21,7 @@
       "DeleteUser",
       "UpdateUser",
       "CreateHolidays",
-      "UpdateHolidays",
+      "DeleteHolidays",
       "UpdateHolidays"
     ]
   }

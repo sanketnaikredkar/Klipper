@@ -1,5 +1,4 @@
-﻿using AuthServer.DataAccess.Database;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -7,11 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
-using AuthServer.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using AuthServer.DataAccess;
 using Common.Logging;
+using IdentityServer4.Stores;
+using AuthServer.Configuration;
 
 namespace AuthServer
 {
@@ -22,8 +19,7 @@ namespace AuthServer
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("AuthorizationPolicies.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("ClientApiConfig.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -53,24 +49,9 @@ namespace AuthServer
                     .AllowCredentials());
             });
 
-            services.AddMvcCore(options =>
-            {
-                // this sets up a default authorization policy for the application
-                // in this case, authenticated users are required 
-                //(besides controllers/actions that have [AllowAnonymous]
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            })
+            services.AddMvcCore()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
             .AddJsonFormatters();
-
-            services.Configure<DBConnectionSettings>(options =>
-            {
-                options.ConnectionString = Configuration.GetSection("MongoConnection:ConnectionString").Value;
-                options.Database = Configuration.GetSection("MongoConnection:Database").Value;
-            });
 
             services.AddIdentityServer(
                     options =>
@@ -81,20 +62,9 @@ namespace AuthServer
                     }
                 )
                 .AddDeveloperSigningCredential()
-                //.AddSigningCredential("CN-sts")
-                //.AddStorageServicesBackedByDatabase()
                 .AddJwtBearerClientAuthentication()
-                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
-                .AddStores();
-
-            // Sets up the PolicyServer client library and policy provider - 
-            //configuration is loaded from AuthorizationPolicies.json
-            IConfiguration configSection = Configuration.GetSection("Policy");
-            services.AddPolicyServerClient(configSection)
-                .AddAuthorizationPermissionPolicies();
-
-            // Adds the necessary handler for our custom additional requirements
-            services.AddCustomPolicyRequirements();
+                .AddInMemoryApiResources(ConfigReader.GetApiResources(Configuration))
+                .AddInMemoryClients(ConfigReader.GetClients(Configuration));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -107,15 +77,8 @@ namespace AuthServer
             {
                 app.UseHsts();
             }
-            // add this middleware to make roles and permissions available as claims
-            // this is mainly useful for using the classic [Authorize(Roles="foo")] and IsInRole functionality
-            // this is not needed if you use the client library directly or the new policy-based authorization framework in ASP.NET Core
-            app.UsePolicyServerClaims();
-
             app.UseMiddleware<SerilogMiddleware>();
             app.UseIdentityServer();
-            //app.UseAuthentication();
-            app.UseStaticFiles();
             app.UseMvc();
         }
     }

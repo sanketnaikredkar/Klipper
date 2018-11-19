@@ -8,7 +8,6 @@ using KlipperApi.DataAccess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Core.HR.Attendance;
-//using PolicyServer.Runtime.Client;
 
 namespace KlipperApi.Controllers.Attendance
 {
@@ -42,7 +41,6 @@ namespace KlipperApi.Controllers.Attendance
             bool isHR = roleClaims.Where(c => c.Value == "HR").First() != null;
             bool isTeamLeader = roleClaims.Where(c => c.Value == "TeamLeader").First() != null;
             bool isEmployee = roleClaims.Where(c => c.Value == "Employee").First() != null;
-
 
             if (isHR)
             {

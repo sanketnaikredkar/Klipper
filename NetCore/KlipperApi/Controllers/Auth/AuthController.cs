@@ -55,13 +55,13 @@ namespace KlipperApi.Controllers.Auth
 
                 var employee = await _employeeAccessor.GetEmployeeAsync(returnedUser.ID);
                 var roles = employee.Roles;
-                SessionCache.CurrentEmployee = employee;
+                SessionCache.Employees.Add(user.UserName, employee);
 
                 var claims = new List<Claim>();
 
                 claims.Add(new Claim(ClaimTypes.Sid, employee.ID.ToString(), ClaimValueTypes.UInteger32));
                 claims.Add(new Claim(ClaimTypes.Email, employee.Email, ClaimValueTypes.Email));
-                claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserName));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserName));
                 claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
                 foreach (var r in roles)
                 {

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -17,12 +18,14 @@ namespace KlipperAuthorization.Requirements.Attendance
             bool isEmployee = roleClaims.Where(c => c.Value == "Employee").Count() > 0;
             if(isHR)
             {
+                //HR can see the attendance data for everybody
                 context.Succeed(requirement);
             }
             else if(isTeamLeader)
             {
-                var loggedInUser = SessionCache.CurrentEmployee;
-                var employeeId = GetEmployeeId(context, loggedInUser);
+                //Team leader can only see the attendance data for his team reportees
+                var loggedInUser = RequirementHelper.GetLoggedInUser(context);
+                var employeeId = int.Parse(RequirementHelper.GetParameterVaueFromRequest(context, "employeeId"));
                 if(employeeId != -1 && loggedInUser.IsReportee(employeeId))
                 {
                     context.Succeed(requirement);
@@ -30,8 +33,9 @@ namespace KlipperAuthorization.Requirements.Attendance
             }
             else
             {
-                var loggedInUser = SessionCache.CurrentEmployee;
-                var employeeId = GetEmployeeId(context, loggedInUser);
+                //Regular employee can only see his own attendance data
+                var loggedInUser = RequirementHelper.GetLoggedInUser(context);
+                var employeeId = int.Parse(RequirementHelper.GetParameterVaueFromRequest(context, "employeeId"));
                 if (employeeId != -1 && loggedInUser.ID == employeeId)
                 {
                     context.Succeed(requirement);
@@ -40,17 +44,6 @@ namespace KlipperAuthorization.Requirements.Attendance
             return Task.CompletedTask;
         }
 
-        private static int GetEmployeeId(AuthorizationHandlerContext context, Employee loggedInUser)
-        {
-            var mvcContext = context.Resource as
-                        Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext;
-            var hasEmployeeId = mvcContext.RouteData.Values.ContainsKey("employeeId");
-            if (hasEmployeeId)
-            {
-                var employeeId = int.Parse(mvcContext.RouteData.Values["employeeId"].ToString());
-                return employeeId;
-            }
-            return -1;
-        }
+
     }
 }

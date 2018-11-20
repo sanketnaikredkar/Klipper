@@ -7,6 +7,6 @@ namespace KlipperAuthorization
 {
     public static class SessionCache
     {
-        static public Employee CurrentEmployee { get; set; } = null;
+        static public Dictionary<string, Employee> Employees { get; set; } = new Dictionary<string, Employee>();
     }
 }

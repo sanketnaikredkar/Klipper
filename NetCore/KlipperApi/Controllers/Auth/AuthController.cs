@@ -13,8 +13,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using KlipperAuthorization;
 
-namespace KlipperApi.Controllers
+namespace KlipperApi.Controllers.Auth
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
@@ -54,12 +55,13 @@ namespace KlipperApi.Controllers
 
                 var employee = await _employeeAccessor.GetEmployeeAsync(returnedUser.ID);
                 var roles = employee.Roles;
+                SessionCache.Employees.Add(user.UserName, employee);
 
                 var claims = new List<Claim>();
 
                 claims.Add(new Claim(ClaimTypes.Sid, employee.ID.ToString(), ClaimValueTypes.UInteger32));
                 claims.Add(new Claim(ClaimTypes.Email, employee.Email, ClaimValueTypes.Email));
-                claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.UserName));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserName));
                 claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
                 foreach (var r in roles)
                 {

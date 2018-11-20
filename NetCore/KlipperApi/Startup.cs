@@ -2,10 +2,9 @@
 using Common.Logging;
 using KlipperApi.Controllers.Attendance;
 using KlipperApi.DataAccess;
-using KlipperApi.Extensions;
+using KlipperAuthorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -73,7 +72,11 @@ namespace KlipperApi
                 )
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddApiExplorer()
-                .AddAuthorization()
+                .AddAuthorization(options =>
+                {
+                    //Here the authorization policies are loaded from KlipperAuthorization module.
+                    new AuthorizationPolicyLoader().Load(options);
+                })
                 .AddJsonFormatters();
 
             services.Configure<DBConnectionSettings>(options =>
@@ -109,17 +112,8 @@ namespace KlipperApi
                     };
                 });
 
-            // Sets up the PolicyServer client library and policy provider - 
-            //configuration is loaded from AuthorizationPolicies.json
-            //IConfiguration configSection = Configuration.GetSection("Policy");
-            //services.AddPolicyServerClient(configSection)
-            //    .AddAuthorizationPermissionPolicies();
-
-            // Adds the necessary handler for our custom additional requirements
-            services.AddTransient<IPolicyEvaluator, PolicyEvaluator>();
-            //KK: This could be separated into a separate DLL so that 
-            //requirements can be (more or less) dynamically configured
-            services.AddCustomPolicyRequirements();
+            //Register policy requirements here...
+            services.AddAuthorizationPolicyRequirements();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

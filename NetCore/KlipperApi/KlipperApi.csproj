@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="AuthorizationPolicies.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\Common\DBConnectionSettings.cs" Link="Common\DBConnectionSettings.cs" />
     <Compile Include="..\Common\DBContext.cs" Link="Common\DBContext.cs" />
     <Compile Include="..\Common\NoCacheAttribute.cs" Link="Common\NoCacheAttribute.cs" />
@@ -41,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KlipperAuthorization\KlipperAuthorization.csproj" />
     <ProjectReference Include="..\Models.Core\Models.Core.csproj" />
   </ItemGroup>
 

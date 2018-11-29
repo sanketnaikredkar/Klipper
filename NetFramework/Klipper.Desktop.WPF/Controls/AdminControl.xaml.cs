@@ -112,8 +112,7 @@ namespace Klipper.Desktop.WPF.Controls
                         x.LastName,
                         x.BirthDate,
                         x.Email
-                    }
-                ).AsQueryable();
+                    }).AsQueryable();
             return jsonData;
         }
 

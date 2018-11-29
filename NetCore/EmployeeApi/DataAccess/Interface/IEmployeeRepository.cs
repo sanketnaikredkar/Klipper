@@ -19,5 +19,6 @@ namespace EmployeeApi.DataAccess.Interfaces
         Task<bool> RemoveAll();
 
         Task<bool> Update(int id, Employee item);
+        Task<int> GetMaxEmployeeId();
     }
 }

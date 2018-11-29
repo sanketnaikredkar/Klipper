@@ -30,16 +30,17 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="100"/>
-            <ColumnDefinition MinWidth="200"/>
+            <ColumnDefinition MinWidth="100" Width="49*"/>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition MinWidth="200" Width="200*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+        <TextBlock Grid.Row="0" Grid.Column="2" 
                    Text="Klipper"
                    FontSize="25"
                    FontWeight="ExtraBold"
                    HorizontalAlignment="Center"
-                   Margin="0">
+                   Margin="5,3,105,3">
             <TextBlock.Foreground>
                 <LinearGradientBrush>
                     <GradientStop Color="#FFFC7F00" Offset="0.045"/>
@@ -60,7 +61,7 @@
                    Foreground="LightGray"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"
-                   Margin="10 0"/>
+                   Margin="0,11,9,10" Grid.ColumnSpan="2"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0"
                    Text="Password"
@@ -69,14 +70,14 @@
                    Foreground="LightGray"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"
-                   Margin="10 0"/>
+                   Margin="0,11,10,10" Grid.ColumnSpan="2"/>
 
         <textboxes:StringInputTextBox
             x:Name="UsernameTextbox"
                     Text="Gourav.Joshi"
-                    Grid.Row="2" Grid.Column="1"
+                    Grid.Row="2" Grid.Column="2"
                     RegEx="^[a-zA-Z\.]{2,30}$"
-                    Margin="16 2" 
+                    Margin="16,8" 
                     FontSize="16"
                     HorizontalAlignment="Stretch"
                     Foreground="YellowGreen"
@@ -90,8 +91,8 @@
         <textboxes:StringInputTextBox
             x:Name="PasswordTextbox"
                     Text="Gourav$xyz987"
-                    Grid.Row="3" Grid.Column="1"
-                    Margin="16 2" 
+                    Grid.Row="3" Grid.Column="2"
+                    Margin="16,8" 
                     FontSize="16"
                     HorizontalAlignment="Stretch"
                     Foreground="YellowGreen"
@@ -102,13 +103,13 @@
                     TextAlignment="Left">
         </textboxes:StringInputTextBox>
         <buttons:PanelButton 
-                    Grid.Row="4" Grid.Column="1"
-                    Margin="10 0"
+                    Grid.Row="4" Grid.Column="2"
+                    Margin="0,0,10,0"
                     HorizontalAlignment="Right"
                     ButtonText="Login"
                     IsEnabled="{Binding ShouldEnableLoginButton}"
-                    Clicked="Login_Clicked"/>
-        
+                    Clicked="Login_Clicked" Loaded="PanelButton_Loaded"/>
+
         <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                    Text="Forgot password?"
                    FontSize="10"
@@ -120,7 +121,7 @@
                    x:Name="ForgotPasswordLabel"
                    Cursor="Hand"
                    MouseLeftButtonUp="ForgotPasswordLabel_MouseLeftButtonUp"
-                   Margin="10 0"/>
+                   Margin="10,13,0,13"/>
 
     </Grid>
 </UserControl>

@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.DataAccess;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeApi.DataAccess.Implementation
 {
@@ -164,7 +166,7 @@ namespace EmployeeApi.DataAccess.Implementation
                 var e = await _context.Employees
                 .Find(filter)
                 .FirstOrDefaultAsync();
-                if(e == null)
+                if (e == null)
                 {
                     return false;
                 }
@@ -173,6 +175,24 @@ namespace EmployeeApi.DataAccess.Implementation
             catch (Exception ex)
             {
                 _logger.Warning("Something went wrong while querying existence of an employee with ID {@ID}.", id);
+                throw ex;
+            }
+        }
+
+        public async Task<int> GetMaxEmployeeId()
+        {
+            try
+            {
+                var maxId = await Task.Run<int>(() => 
+                    _context.Employees
+                    .AsQueryable<Employee>()
+                    .Select(x => x.ID)
+                    .Max());
+                return maxId;
+            }
+            catch (Exception ex)
+            {
+                _logger.Warning("Something went wrong while querying existence of an employee with Max ID.");
                 throw ex;
             }
         }

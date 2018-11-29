@@ -53,6 +53,13 @@ namespace EmployeeApi.Controllers
             return Ok(value);
         }
 
+        // GET api/employees/GetMaxID
+        [HttpGet]
+        [Route("GetMaxEmployeeId")]
+        public IActionResult GetMaxEmployeeId()
+        {
+            return Ok(_repository.GetMaxEmployeeId().Result);
+        }
         // POST api/employees
         [HttpPost]
         public IActionResult Post([FromBody] Employee value)

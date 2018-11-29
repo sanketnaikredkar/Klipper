@@ -71,5 +71,10 @@ namespace Klipper.Desktop.WPF
         {
             RaisePropertyChanged("ShouldEnableLoginButton");
         }
+
+        private void PanelButton_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -2,371 +2,110 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:navigators="clr-namespace:Sparkle.Controls.Navigators;assembly=Sparkle"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <!--<ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Sparkle;component/StylesAndTemplates/InputElements.xaml" />
-            </ResourceDictionary.MergedDictionaries>-->
-            
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <StackPanel Margin="10">
-        <StackPanel>
-            <TextBlock 
-                Text="General Information" 
-                 
-                TextDecorations="Underline"
-                Foreground="#26e291" 
-                FontWeight="Bold"/>
-        </StackPanel>
-        <!--General information-->
-        <Border BorderBrush="#003c56" Background="#00202d" BorderThickness="1" Padding="8 8 8 8" CornerRadius="5,5,5,5">
-            <Grid>
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+
+    <Grid VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1"
+            Background="{DynamicResource BackgroundBase_06}">
+
+            <Grid Background="Transparent" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch">
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="Auto" MinWidth="20"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <Border BorderBrush="#003c56" Background="#003c56" BorderThickness="1" Margin="2" >
-                        <Image Margin="1" Height="128" Source="pack://application:,,,/Images/profilePic.png"></Image>
+
+                <navigators:HamburgerMenu
+                    x:Name="TheMenu"
+                    Grid.Column="0">
+                </navigators:HamburgerMenu>
+            </Grid>
+
+        </Border>
+        <!--Body panel-->
+        <Border Grid.Row="0" Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Background="#404B52" Grid.Row="0">
+                    <Border BorderThickness="1" Margin="1" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="AddEmployee" 
+                                    Grid.Column="0" 
+                                    Margin="1" 
+                                    Width="45" 
+                                    Cursor="Hand" 
+                                    Background="Transparent"
+                                    ToolTip="Add New Employee" 
+                                    Click="AddEmployee_click">
+                                <Image Height="40" Width="40" Cursor="Hand" ToolTip="Refresh" 
+                                       Source="pack://application:,,,/Images/user_pic.png"/>
+                            </Button>
+                            <Button x:Name="RefreshData" 
+                                    Grid.Column="1" 
+                                    Margin="1" 
+                                    Width="45" 
+                                    Cursor="Hand" 
+                                    Background="Transparent"
+                                    ToolTip="Refresh" 
+                                    Click="AddEmployee_click">
+                                <Image Height="40" Width="40" Cursor="Hand" ToolTip="Refresh" 
+                                       Source="pack://application:,,,/Images/refresh.png"/>
+                            </Button>
+                            <Button x:Name="UpdateUser" 
+                                    Grid.Column="2" 
+                                    Margin="1" 
+                                    Width="45" 
+                                    Cursor="Hand" 
+                                    Background="Transparent"
+                                    ToolTip="Refresh">
+                                <Image Height="40" Width="40" Cursor="Hand" ToolTip="Update Employee" 
+                                       Source="pack://application:,,,/Images/update-user.png"/>
+                            </Button>
+                        </Grid>
                     </Border>
-                    <Button Content="Upload" Cursor="Hand" Margin="0"></Button>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Margin="10 0 0 0">
-                    <!--1st Row-->
-                    <Grid x:Name="Row1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 10 0">
-                            <TextBlock 
-                                
-                                Text="Title" 
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <TextBox
-                                x:Name="TitleTextBox"
-                                Text="Software Developer"
-                                Padding="2" 
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                />
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="ID" 
-                                
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <TextBox 
-                                x:Name="IDTextBox"
-                                Text="101"
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                
-                                Padding="2"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="Prefix" 
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <ComboBox 
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                SelectedValue="Mr."
-                                SelectedValuePath="Content"
-                                Padding="3">
-                                <ComboBoxItem  Name="cbi1">Mr.</ComboBoxItem>
-                                <ComboBoxItem  Name="cbi2">Ms.</ComboBoxItem>
-                                <ComboBoxItem  Name="cbi3">Mrs.</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="3" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="First Name" 
-                                
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <TextBox 
-                                x:Name="FirstNameTextBox"
-                                Text="Sanket"
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                Padding="2"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="4" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="Last Name" 
-                                
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <TextBox 
-                                x:Name="LastNameTextBox"
-                                Text="Goyal"
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                Padding="2"/>
-                        </StackPanel>
-                    </Grid>
-                    <!--2nd Row-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.3*"/>
-                            <ColumnDefinition Width="0.4*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="Birth Date" 
-                                 
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <DatePicker 
-                                Padding="2" 
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                />
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="Gender" 
-                                
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <RadioButton
-                                    GroupName="OptionGender"
-                                    Grid.Column="0"
-                                    Foreground="#aeb1b2"
-                                    Background="{DynamicResource BackgroundBase_05}"
-                                    BorderBrush="{DynamicResource BackgroundBase_05}"
-                                    VerticalContentAlignment="Center"
-                                    Cursor="Hand"
-                                    Padding="2">M</RadioButton>
-                                <RadioButton
-                                    GroupName="OptionGender"
-                                    Foreground="#aeb1b2"
-                                    Background="{DynamicResource BackgroundBase_05}"
-                                    BorderBrush="{DynamicResource BackgroundBase_05}"
-                                    Grid.Column="1"
-                                    VerticalContentAlignment="Center"
-                                    Cursor="Hand"
-                                    Padding="2">F</RadioButton>
-                            </Grid>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="Email" 
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <TextBox
-                                Text="Sanket.Goyal@klingelnberg.com"
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                
-                                Padding="2"/>
-                        </StackPanel>
-                    </Grid>
-                    <!--3rd Row-->
-                    <Grid  x:Name="Row3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.3*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="Mobile No." 
-                                 
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <TextBox
-                                Text="+91-9998887771"
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                
-                                Padding="2"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 10 0">
-                            <TextBlock 
-                                Text="Work Phone No." 
-                                
-                                Foreground="YellowGreen" 
-                                Margin="0 5 0 0"/>
-                            <TextBox
-                                Text="020-987654"
-                                Foreground="#aeb1b2"
-                                Background="{DynamicResource BackgroundBase_05}"
-                                BorderBrush="{DynamicResource BackgroundBase_05}"
-                                
-                                Padding="2"/>
-                        </StackPanel>
-                    </Grid>
+                <StackPanel Grid.Row="1" Background="#222D34">
+                    <ContentControl x:Name="InteractionArea" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Center">
+                        <DataGrid HorizontalAlignment="Center" Name="dataGrid1" VerticalAlignment="Top">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID"/>
+                                <DataGridTextColumn Header="Title" />
+                                <DataGridTextColumn Header="Title" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </ContentControl>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <StackPanel>
-            <TextBlock 
-                Text="Other Information" 
-                 
-                TextDecorations="Underline"
-                Foreground="#26e291" 
-                FontWeight="Bold"/>
-        </StackPanel>
-        <!--Other information-->
-        <Border BorderBrush="#003c56" Background="#00202d"  BorderThickness="1" Padding="8 8 8 8"  CornerRadius="5,5,5,5">
-            <StackPanel>
-                <!--1st Row-->
-                <Grid x:Name="Row11">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 10 0">
-                        <TextBlock 
-                            Text="Provident Fund No." 
-                             
-                            Foreground="YellowGreen" 
-                            Margin="0 5 0 0"/>
-                        <TextBox
-                            Text="MH/PUN/205890/XXX" 
-                            Foreground="#aeb1b2"
-                            Background="{DynamicResource BackgroundBase_05}"
-                            BorderBrush="{DynamicResource BackgroundBase_05}"
-                            Padding="2" 
-                            />
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 10 0">
-                        <TextBlock 
-                            Text="Provident Fund UAN No." 
-                            
-                            Foreground="YellowGreen" 
-                            Margin="0 5 0 0"/>
-                        <TextBox
-                            Text="908070744012"
-                            Foreground="#aeb1b2"
-                            Background="{DynamicResource BackgroundBase_05}"
-                            BorderBrush="{DynamicResource BackgroundBase_05}"
-                            Padding="2"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 0 10 0">
-                        <TextBlock 
-                            Text="PAN No." 
-                            Foreground="YellowGreen" 
-                            Margin="0 5 0 0"/>
-                        <TextBox
-                            Text="AKNPG1843Z"
-                            Foreground="#aeb1b2"
-                            Background="{DynamicResource BackgroundBase_05}"
-                            BorderBrush="{DynamicResource BackgroundBase_05}"
-                            Padding="2"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="3" Margin="0 0 10 0">
-                        <TextBlock 
-                            Text="Aadhar No." 
-                            
-                            Foreground="YellowGreen" 
-                            Margin="0 5 0 0"/>
-                        <TextBox
-                            Text="4988 4454 7326"
-                            Foreground="#aeb1b2"
-                            Background="{DynamicResource BackgroundBase_05}"
-                            BorderBrush="{DynamicResource BackgroundBase_05}"
-                            Padding="2"/>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-
-
-        </Border>
-
-        <!--Working Details-->
-        <StackPanel>
-            <TextBlock 
-                Text="Working Details" 
-                 
-                TextDecorations="Underline"
-                Foreground="#26e291" 
-                FontWeight="Bold"/>
-        </StackPanel>
-        <!--1st Row-->
-        <Border BorderBrush="#003c56" Background="#00202d"  BorderThickness="1" Padding="8 8 8 8"  CornerRadius="5,5,5,5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Row="0" Grid.Column="0" Margin="0 0 10 0">
-                    <TextBlock 
-                        Text="JoiningDate" 
-                         
-                        Foreground="YellowGreen" 
-                        Margin="0 5 0 0"/>
-                    <TextBox
-                        Text="20-Jan-2018"
-                        Foreground="#aeb1b2"
-                        Background="{DynamicResource BackgroundBase_05}"
-                        BorderBrush="{DynamicResource BackgroundBase_05}"
-                        Padding="2" 
-                        />
-                </StackPanel>
-                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 0 10 0">
-                    <TextBlock 
-                        Text="RegistrationDate" 
-                        Foreground="YellowGreen" 
-                        Margin="0 5 0 0"/>
-                    <TextBox
-                        Text="29-Dec-2018"
-                        Foreground="#aeb1b2"
-                        Background="{DynamicResource BackgroundBase_05}"
-                        BorderBrush="{DynamicResource BackgroundBase_05}"
-                        Padding="2"/>
-                </StackPanel>
-            </Grid>
-        </Border>
-
-        <StackPanel Margin="0 20 0 0">
-            <Button 
-                x:Name="SaveButton" 
-                Content="Save" 
-                Height="30" 
-                Width="60" 
-                Cursor="Hand"
-                Click="Save_EmployeeData"/>
-        </StackPanel>
-    </StackPanel>
-
+    </Grid>
 
 </UserControl>

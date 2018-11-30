@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:navigators="clr-namespace:Sparkle.Controls.Navigators;assembly=Sparkle"
+             xmlns:assorted="clr-namespace:Sparkle.Controls.Assorted;assembly=Sparkle"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
 
@@ -30,7 +31,7 @@
                 </Grid.ColumnDefinitions>
 
                 <navigators:HamburgerMenu
-                    x:Name="TheMenu"
+                    x:Name="AdminMenu"
                     Grid.Column="0">
                 </navigators:HamburgerMenu>
             </Grid>
@@ -47,12 +48,13 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Background="#404B52" Grid.Row="0">
-                    <Border BorderThickness="1" Margin="1" >
+                    <Border BorderThickness="0.5" Margin="0.5" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
                                 <ColumnDefinition Width="50"/>
                                 <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="200"/>
                             </Grid.ColumnDefinitions>
 
                             <Button x:Name="AddEmployee" 
@@ -87,21 +89,33 @@
                                 <Image Height="40" Width="40" Cursor="Hand" ToolTip="Update Employee" 
                                        Source="pack://application:,,,/Images/update-user.png"/>
                             </Button>
+                            <assorted:SearchBox
+                                    x:Name="SearchBoxC"
+                                    Grid.Column="3" 
+                                    SearchTextForeground="White"
+                                    SearchTextBackground="#2b3338"
+                                    SearchCaretBrush="#FFE8E86B"
+                                    SearchTextFontSize="12"
+                                    ShowHints="True"
+                                    ShowAdvancedSearch="False"
+                                    MaximumSearchHints="10"
+                                    HintsDisplayDirection="Bottom"
+                                    IconBackground="#2FC26F"
+                                    IconMouseOverBackground="#FF5AA535"
+                                    IconPressedBackground="#FF3A6316"
+                                    Width="200"
+                                    Height="35"
+                                    IconSize="20"
+                                    />
                         </Grid>
                     </Border>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Background="#222D34">
+
                     <ContentControl x:Name="InteractionArea" 
                         HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Center">
-                        <DataGrid HorizontalAlignment="Center" Name="dataGrid1" VerticalAlignment="Top">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID"/>
-                                <DataGridTextColumn Header="Title" />
-                                <DataGridTextColumn Header="Title" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </ContentControl>
+                        VerticalAlignment="Center"/>
+
                 </StackPanel>
             </Grid>
         </Border>

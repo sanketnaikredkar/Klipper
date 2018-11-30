@@ -1,4 +1,5 @@
 ﻿using Klipper.Desktop.WPF.CustomControls;
+using Models.Core;
 using Models.Core.Employment;
 using Newtonsoft.Json;
 using Sparkle.Appearance;
@@ -29,22 +30,20 @@ namespace Klipper.Desktop.WPF.Controls
     /// </summary>
     public partial class AdminControl : UserControl
     {
-        HttpClient client = new HttpClient();
         public AdminControl()
         {
             InitializeComponent();
-            client.BaseAddress = new Uri("https://localhost:6001/");
-            TheMenu.CollapsedWidth = 50.0;
-            TheMenu.ExpandedWidth = 220.0;
-            TheMenu.SelectedIndex = 0;
-            TheMenu.Expand();
-            dataGrid1.ItemsSource = Task.Run(async ()=> await GetAllEmployeesAsync()).Result;
+            AdminMenu.CollapsedWidth = 50.0;
+            AdminMenu.ExpandedWidth = 220.0;
+            AdminMenu.SelectedIndex = 0;
+            AdminMenu.MenuSelectionChanged += OnMenuSelectionChanged;
+            AdminMenu.Expand();
+
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMenuItems();
-            var data = Task.Run(async () => await GetAllEmployeesAsync()).Result;
         }
 
         private void LoadMenuItems()
@@ -63,7 +62,7 @@ namespace Klipper.Desktop.WPF.Controls
                     IconWidth = 35,
                     ItemHeight = 50
                 };
-                TheMenu.AddMenuItem(tab);
+                AdminMenu.AddMenuItem(tab);
             }
         }
 
@@ -96,26 +95,16 @@ namespace Klipper.Desktop.WPF.Controls
 
         private void OnMenuSelectionChanged(object sender, SelectableItemSelectionChangedEventArgs e)
         {
-            var item = e.Current;
-            InteractionArea.Content = item.AssociatedContent;
-            item.AssociatedContent.IsEnabled = false;
-            TheMenu.ForceResize();
+            if (e.Current.Header.Equals("User Management",StringComparison.OrdinalIgnoreCase))
+            {
+                InteractionArea.Content = new EmployeeListPanelControl(); //load dynamic panel
+            }
+            else
+            {
+                InteractionArea.Content = null;
+            }
+            AdminMenu.ForceResize();
         }
-
-        private async Task<IQueryable> GetAllEmployeesAsync()
-        {
-            HttpResponseMessage response = client.GetAsync("/api/Employees").Result;
-            string jsonString = await response.Content.ReadAsStringAsync();
-            IQueryable jsonData = JsonConvert.DeserializeObject<Employee[]>(jsonString)
-                .Select(x=> new {
-                        x.FirstName,
-                        x.LastName,
-                        x.BirthDate,
-                        x.Email
-                    }).AsQueryable();
-            return jsonData;
-        }
-
 
         private void AddEmployee_click(object sender, RoutedEventArgs e)
         {
@@ -132,7 +121,7 @@ namespace Klipper.Desktop.WPF.Controls
 
             dlg.SetDialogRegion(cp);
             dlg.DialogClosed += (s, args) => { dlg.Close(); };
-            
+
             var btn = new PanelButton() { ButtonWidth = 150, ButtonText = "close!" };
             btn.Clicked += (s, args) => { dlg.Close(); };
             dlg.AddButton(btn);

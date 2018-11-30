@@ -32,12 +32,6 @@ namespace Klipper.Desktop.WPF.CustomControls
     {
         public event EventHandler Closed = null;
         private HttpClient _client = new HttpClient();
-
-        public ObservableCollection<SelectableItem> Items { get; } = new ObservableCollection<SelectableItem>()
-        {
-            new SelectableItem("M", null),
-            new SelectableItem("F", null),
-        };
         private int _SelectedIndex = 0;
         public int SelectedIndex
         {
@@ -62,7 +56,12 @@ namespace Klipper.Desktop.WPF.CustomControls
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
-       
+        public ObservableCollection<SelectableItem> Items { get; } = new ObservableCollection<SelectableItem>()
+        {
+            new SelectableItem("M", null),
+            new SelectableItem("F", null),
+            //dependent function : ItemSelectionChanged()
+        };
         public AddEmployeeControl()
         {
             InitializeComponent();
@@ -114,16 +113,12 @@ namespace Klipper.Desktop.WPF.CustomControls
         {
             e.Handled = !IsTextAllowed(e.Text);
         }
-        private static bool IsTextAllowed(string text)
+        private static bool IsTextAllowed(string text) //Input text validation : input only numbers
         {
             Regex _regex = new Regex("[^0-9.-]+");
             return !_regex.IsMatch(text);
         }
-
-        private void MyRadioTrain_Loaded(object sender, RoutedEventArgs e)
-        {
-            MyRadioTrain.ItemSelectionChanged += ItemSelectionChanged;
-        }
+ 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

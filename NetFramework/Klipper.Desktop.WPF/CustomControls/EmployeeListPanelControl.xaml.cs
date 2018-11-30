@@ -22,8 +22,10 @@ namespace Klipper.Desktop.WPF.CustomControls
 
         private async Task<IQueryable> GetAllEmployeesAsync()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:6001/");
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:6001/")
+            };
             HttpResponseMessage response = client.GetAsync("/api/Employees").Result;
             string jsonString = await response.Content.ReadAsStringAsync();
             IQueryable jsonData = JsonConvert.DeserializeObject<Employee[]>(jsonString)
@@ -42,8 +44,8 @@ namespace Klipper.Desktop.WPF.CustomControls
 
         private async void EmployeeList_LoadedAsync(object sender, System.Windows.RoutedEventArgs e)
         {
-            TheLoader.LoadingText = "Loading data...";
-            TheLoader.SwitchToLoader();
+            DataLoaderAnimation.LoadingText = "Loading data...";
+            DataLoaderAnimation.SwitchToLoader();
             employeeList.ItemsSource = await GetAllEmployeesAsync();
             await Task.Delay(3000);
             LoaderPanel.Visibility = Visibility.Hidden;

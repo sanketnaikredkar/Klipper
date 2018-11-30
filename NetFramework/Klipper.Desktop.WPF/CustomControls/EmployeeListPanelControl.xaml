@@ -15,7 +15,7 @@
                 HorizontalAlignment="Center"
                 Margin="50"
 				Background="Transparent">
-                <progress:Loader x:Name="TheLoader" Margin="15 100"/>
+                <progress:Loader x:Name="DataLoaderAnimation"  Margin="15 100"/>
             </Border>
         </StackPanel>
 

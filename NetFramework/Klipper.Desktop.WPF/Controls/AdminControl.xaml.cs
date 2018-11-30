@@ -1,7 +1,4 @@
 ﻿using Klipper.Desktop.WPF.CustomControls;
-using Models.Core;
-using Models.Core.Employment;
-using Newtonsoft.Json;
 using Sparkle.Appearance;
 using Sparkle.Controls.Buttons;
 using Sparkle.Controls.Dialogs;
@@ -9,19 +6,9 @@ using Sparkle.Controls.Panels;
 using Sparkle.DataStructures;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Klipper.Desktop.WPF.Controls
 {
@@ -38,7 +25,6 @@ namespace Klipper.Desktop.WPF.Controls
             AdminMenu.SelectedIndex = 0;
             AdminMenu.MenuSelectionChanged += OnMenuSelectionChanged;
             AdminMenu.Expand();
-
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -108,16 +94,17 @@ namespace Klipper.Desktop.WPF.Controls
 
         private void AddEmployee_click(object sender, RoutedEventArgs e)
         {
-            GenericDialog dlg = new GenericDialog();
-            dlg.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            GenericDialog dlg = new GenericDialog
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Header = "Add New Employee",
+                ShowCloseButton = true,
+            };
             dlg.CollapseBottomRegion();
-            dlg.ShowCloseButton = true;
-            dlg.Header = "Add New Employee";
             AppearanceManager.SetAppearance(dlg);
 
-            var cp = new BasicDialogPanel();
-            var control = new AddEmployeeControl();
-            cp.Container.Content = control;
+            BasicDialogPanel cp = new BasicDialogPanel();
+            cp.Container.Content = new AddEmployeeControl();
 
             dlg.SetDialogRegion(cp);
             dlg.DialogClosed += (s, args) => { dlg.Close(); };
@@ -126,7 +113,6 @@ namespace Klipper.Desktop.WPF.Controls
             btn.Clicked += (s, args) => { dlg.Close(); };
             dlg.AddButton(btn);
             dlg.ShowDialog();
-            //AddChild(dlg);
         }
     }
 }
